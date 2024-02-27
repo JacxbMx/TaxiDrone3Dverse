@@ -1,0 +1,12 @@
+.canvas-container{
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.configuration-layout{
+  position: absolute;
+}
