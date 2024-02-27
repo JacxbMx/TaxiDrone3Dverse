@@ -15,12 +15,11 @@
         ></canvas>
 
         <div class="configuration-layout">
-            <button class="bttn-option" role="button" id="bttn-option">Button 1</button>
+            <button class="bttn-option" role="button" id="bttn-option-1">Button 1</button>
         </div>
         <div class="comparative-layout">
 
         </div>
-
 
 
     </div>
@@ -32,28 +31,71 @@
    
 </body>
  <!-- APP ENTRYPOINT -->
- <script src="./td_main.js" type="module"></script>
+ <script src="./td_main1.js" type="module"></script>
 
  <script>
+    
+    
+     //var  table21 = 0;
+    //const table =  await SDK3DVerse.engineAPI.getEntity();
+    //const table21 = SDK3DVerse.engineAPI.findEntitiesByEUID('9c0901f6-6097-4c6b-9a19-ac463bc09b3a');
+   
+    /*
+    document.getElementById("bttn-option-1").addEventListener('click', function (){
+        table21[0].setVisibility(false);
+        console.log("Presione el boton y la mesa se apago");
+    });
+   */
+
+
+    /*
     async function onClick(event){
         const target = await SDK3DVerse.engineAPI.castScreenSpaceRay(event.clientX, event.clientY);
+        
+       
+        
 
         if(!target.pickedPosition) return;
 
         const clickedEntity = target.entity;
-        console.log("Hice click en esta entidad" + clickedEntity);
+        console.log("este es la entidad " + target + clickedEntity.getID());
+
+
+        const nuevaEntity = await SDK3DVerse.engineAPI.getEntity(clickedEntity.getID());
+        console.log("este es mi nueva  entidad " + nuevaEntity);
+
 
         const rootEntities = await SDK3DVerse.engineAPI.getRootEntities();
         const cilynderEntitiy = rootEntities.find((e) => e.getName() === 'Primitive');
+        const table = rootEntities.find((e) => e.getID() === "2116831720");
+        console.log("la entiedad del root 0 es " + table);
+        nuevaEntity.setVisibility(false);
+        console.log("apague mi nueva enntidad  " + nuevaEntity);
 
+        table21 = await SDK3DVerse.engineAPI.findEntitiesByEUID('9c0901f6-6097-4c6b-9a19-ac463bc09b3a');
+        console.log("apague mi nueva find entity " + table21);
+        table21[0].setVisibility(true);
+        
+       // clickedEntity.setVisibility(true);
+        //var entityTransform = entity.getComponent('local_transform');
+        clickedEntity.select();
         if(clickedEntity.getID()){
 
         }
     };
- </script>
+    */
+    async function onClick(event){
+    screenTarget = await SDK3DVerse.engineAPI.castScreenSpaceRay(event.clientX, event.clientY);
 
- <script>
+    if(!screenTarget.pickedPosition) return;
+
+    const clickedEntity = screenTarget.entity;
+
+    clickedEntity.select();
+}
+
     
  </script>
+
 
 </html>
