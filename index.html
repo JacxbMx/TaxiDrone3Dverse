@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta  content="width=device-width,initial-scale=1.0" name="viewport"/>
+        <link rel="stylesheet" href="./td_style.css" />
+    </head>
+
+    <div class="canvas-container">
+        <!-- CANVAS -->
+        <canvas
+            id="display-canvas"
+            class="display-canvas"
+            oncontextmenu="event.preventDefault()"
+            onclick="onClick(event)"
+        ></canvas>
+
+        <div class="configuration-layout">
+            <button class="bttn-option" role="button" id="bttn-option">Button 1</button>
+        </div>
+        <div class="comparative-layout">
+
+        </div>
+
+
+
+    </div>
+        
+    <!-- LIVELINK SDK -->
+    <script src="https://cdn.3dverse.com/legacy/sdk/stable/SDK3DVerse.js"></script>
+
+    
+   
+</body>
+ <!-- APP ENTRYPOINT -->
+ <script src="./td_main.js" type="module"></script>
+
+ <script>
+    async function onClick(event){
+        const target = await SDK3DVerse.engineAPI.castScreenSpaceRay(event.clientX, event.clientY);
+
+        if(!target.pickedPosition) return;
+
+        const clickedEntity = target.entity;
+        console.log("Hice click en esta entidad" + clickedEntity);
+
+        const rootEntities = await SDK3DVerse.engineAPI.getRootEntities();
+        const cilynderEntitiy = rootEntities.find((e) => e.getName() === 'Primitive');
+
+        if(clickedEntity.getID()){
+
+        }
+    };
+ </script>
+
+ <script>
+    
+ </script>
+
+</html>
