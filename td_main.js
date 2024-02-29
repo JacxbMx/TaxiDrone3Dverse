@@ -10,6 +10,13 @@ var id_sceneUUID_emmar = "c9d32558-52d0-4db9-bd16-8ee3d954c7c8";
 var screenTarget = 0;
 var id_comedor = 0;
 var status_comedor = true;
+var mat_comedor = 0;
+
+
+var mat_id_ls1marble = '74cdc027-a51d-4c38-ae9d-27ba39cf2d63';
+var mat_id_diningtable5 = '1b6d4867-e18c-413e-ad91-6b9a1d7309a5';
+var mat_ref_ls1marble = 0;
+var mat_ref_diningtable5 = 0;
 
 async function initApp() {
 
@@ -36,18 +43,34 @@ async function initApp() {
     //const table = SDK3DVerse.engineAPI.getEntity(2116831720);
    // console.log("este es el rtid " + table);
     //const rootEntities = await SDK3DVerse.engineAPI.getRootEntities();
+    
 
-    // obtener entidad referenciandola con el 
+
+
+    // How to call an entity across UUID
     id_comedor = await SDK3DVerse.engineAPI.findEntitiesByEUID('9c0901f6-6097-4c6b-9a19-ac463bc09b3a');
     console.log('el id de mi comedor es'+ id_comedor);
-    
+
+    //How to get material component
+    mat_comedor = id_comedor[0].getComponent('material_ref');
+    console.log('mi material es' + mat_comedor);
+
+
+    //how to get the types of all the components attached to the entity
+    const componentTypes = id_comedor[0].getComponentTypes();
+    console.log('comedor components' + componentTypes);
+
+    //set material ref
+    mat_ref_ls1marble = {value : mat_id_ls1marble};
+    mat_ref_diningtable5 = {value : mat_id_diningtable5};
+    console.log('setes mis materiales' +mat_ref_diningtable5, mat_ref_ls1marble);
 }
 
 
 
 
 
-document.getElementById("bttn-option-1").addEventListener('click', function (){
+document.getElementById("bttn-hide").addEventListener('click', function (){
     if(status_comedor){
         id_comedor[0].setVisibility(false);
         status_comedor = false;
@@ -60,4 +83,15 @@ document.getElementById("bttn-option-1").addEventListener('click', function (){
        // id_comedor[0].select();
     }
     
+});
+
+document.getElementById("bttn-material").addEventListener('click',function(){
+
+     id_comedor[0].setComponent('material_ref', mat_ref_ls1marble);
+     console.log('cambie el material a'+ mat_ref_ls1marble);
+});
+document.getElementById("bttn-material-2").addEventListener('click',function(){
+
+    id_comedor[0].setComponent('material_ref', mat_ref_diningtable5);
+    console.log('cambie el material a'+ mat_ref_diningtable5);
 });
