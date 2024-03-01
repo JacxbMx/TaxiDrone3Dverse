@@ -23,6 +23,11 @@
         <div class="comparative-layout">
 
         </div>
+        <div class="info">
+            <div id="info-1" class="show-info">
+                <h4>aqui esta toda la info referente a este componente</h4>
+            </div>
+        </div>
 
 
     </div>
@@ -34,7 +39,7 @@
    
 </body>
  <!-- APP ENTRYPOINT -->
- <script src="./td_main.js" type="module"></script>
+ <script src="./td_main1.js" type="module"></script>
 
  <script>
     /*
@@ -73,6 +78,8 @@
         }
     };
     */
+
+    //  get entities from click
     async function onClick(event){
     screenTarget = await SDK3DVerse.engineAPI.castScreenSpaceRay(event.clientX, event.clientY);
 
@@ -81,7 +88,20 @@
     const clickedEntity = screenTarget.entity;
 
     clickedEntity.select();
-}
+
+    console.log("clickee la entidad", clickedEntity.getEUID());
+    
+    
+    // mostrar una anotacion si se clickea una entidad especifica 
+    if(clickedEntity.getEUID() ==  "9c0901f6-6097-4c6b-9a19-ac463bc09b3a"){
+        document.getElementById("info-1").style.display = "inline";
+    }
+    else{
+        document.getElementById("info-1").style.display = "none";
+    }
+
+
+    }
 
     
  </script>

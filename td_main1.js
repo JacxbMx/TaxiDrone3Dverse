@@ -58,7 +58,7 @@ async function initApp() {
    // console.log("este es el rtid " + table);
     //const rootEntities = await SDK3DVerse.engineAPI.getRootEntities();
     
-
+    HideAllAnotations();
 
 
     // How to call an entity across UUID
@@ -149,4 +149,6 @@ document.getElementById("bttn-env-1").addEventListener('click',function(){
 });
 
 
-
+function HideAllAnotations(){
+    document.getElementById("info-1").style.display = "none";
+}
