@@ -12,7 +12,7 @@ var id_comedor = 0;
 var status_comedor = true;
 var mat_comedor = 0;
 
-
+//materials
 var mat_id_ls1marble = '74cdc027-a51d-4c38-ae9d-27ba39cf2d63';
 var mat_id_diningtable5 = '1b6d4867-e18c-413e-ad91-6b9a1d7309a5';
 var mat_ref_ls1marble = 0;
@@ -31,6 +31,11 @@ var sky_canary = '1d5af958-fa81-4b25-bf2d-25c6018df570';
 var radiance_canary = '977ce761-e7d7-4b2d-ad50-6ad45854b235';
 var irradiance_canary = '1166a906-8831-445d-b0f1-0b7075bb7133';
 
+//lights
+var id_light = '6e5aaa64-4a41-4d52-b026-dc3fb732f94d';
+var light_1  = 0;
+var isLight = true;
+
 
 async function initApp() {
 
@@ -39,7 +44,7 @@ async function initApp() {
         sceneUUID: id_sceneUUID_emmar,
         canvas: document.getElementById("display-canvas"),
         viewportProperties: {
-            defaultControllerType: SDK3DVerse.controller_type.editor,
+            defaultControllerType: SDK3DVerse.controller_type.orbit,
         },
         
         
@@ -90,6 +95,12 @@ async function initApp() {
     irradiance_canary = {value : '1166a906-8831-445d-b0f1-0b7075bb7133'};
     console.log('environment components',  sky_canary, radiance_canary, irradiance_canary);
 
+    //How to set light
+    light_1 = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_light);
+    console.log('mi luz tiene este id ' , light_1[0]);
+    const componentTypeslight = light_1[0].getComponentTypes();
+    console.log('light components', componentTypeslight);
+
 }
 
 
@@ -100,12 +111,12 @@ document.getElementById("bttn-hide").addEventListener('click', function (){
     if(status_comedor){
         id_comedor[0].setVisibility(false);
         status_comedor = false;
-        console.log('apague mi comedor', id_comedor);
+        console.log('apague mi comedor', id_comedor[0]);
     }
     else if (!status_comedor){
         id_comedor[0].setVisibility(true);
         status_comedor = true;
-        console.log('prendi mi comedor', id_comedor);
+        console.log('prendi mi comedor', id_comedor[0]);
        // id_comedor[0].select();
     }
     
@@ -139,11 +150,12 @@ document.getElementById("bttn-env-original").addEventListener('click',function()
 
 document.getElementById("bttn-env-1").addEventListener('click',function(){
 
-    environment[0].setComponent('environment', {
-    sky_canary,
-    radiance_canary,
-    irradiance_canary,
-    });
+    const canary_environment ={
+      skybox: sky_canary,
+      radiance: radiance_canary,
+      irradiance: irradiance_canary
+    } 
+    environment[0].setComponent('environment', canary_environment);
     SDK3DVerse.engineAPI.commitChanges();
     console.log('cambie el skybox a canary');
 });
@@ -152,3 +164,50 @@ document.getElementById("bttn-env-1").addEventListener('click',function(){
 function HideAllAnotations(){
     document.getElementById("info-1").style.display = "none";
 }
+
+document.getElementById("bttn-lights").addEventListener('click', function(){
+     if(isLight){
+        light_1[0].setVisibility(false);
+        isLight = false;
+        console.log('apague mi luz', light_1[0]);
+     }
+     else if(!isLight){
+        light_1[0].setVisibility(true);
+        isLight = true;
+        console.log('apague mi luz', light_1[0]);
+     }
+});
+
+document.getElementById("bttn-move").addEventListener('click', function(){
+    var comedorLoc = id_comedor[0].getComponent('local_transform');
+    console.log("local tranform", comedorLoc);
+    //id_comedor[0].setComponent("local_transform", "position", 0,1,0);
+
+
+    const comedor_transform = {
+        position: [0,1,0],
+        orientation: [0,0,0,1],
+        scale: [1,1,1]
+    }
+     id_comedor[0].setGlobalTransform({position : [0,0.1,0.1]});
+
+        comedorLoc = id_comedor[0].getComponent('local_transform');
+     console.log("new local tranform", comedorLoc);
+});
+
+document.getElementById("bttn-move-1").addEventListener('click', function(){
+    var comedorLoc = id_comedor[0].getComponent('local_transform');
+    console.log("local tranform", comedorLoc);
+    //id_comedor[0].setComponent("local_transform", "position", 0,1,0);
+
+
+    const comedor_default_transform = {
+        position: [0,0,0],
+        orientation: [0,0,0,1],
+        scale: [1,1,1]
+    }
+     id_comedor[0].setGlobalTransform(comedor_default_transform);
+
+        comedorLoc = id_comedor[0].getComponent('local_transform');
+     console.log("new local tranform", comedorLoc);
+});
