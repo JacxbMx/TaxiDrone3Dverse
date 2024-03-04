@@ -163,6 +163,8 @@ function ToggleLights(materialLights, statusLight){
     console.log("las luces del dron estan", statusLight);
 }
 
+
+//Methos to manage drone visualization
 function InitDroneVisualization(){
     
     droneOriginal[0].setGlobalTransform({position : [0,0,0]});
