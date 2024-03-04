@@ -2,8 +2,10 @@
     <head>
         <meta charset="UTF-8"/>
         <meta  content="width=device-width,initial-scale=1.0" name="viewport"/>
-        <link rel="stylesheet" href="./td_style.css" />
+        <link rel="stylesheet" href="style1.css" />
     </head>
+<body>
+    
 
     <div class="canvas-container">
         <!-- CANVAS -->
@@ -14,23 +16,66 @@
             onclick="onClick(event)"
         ></canvas>
 
-        <div class="configuration-layout">
-            <button class="bttn-option" role="button" id="bttn-hide">Hide/Show</button>
-            <button class="bttn-option" role="button" id="bttn-material">Material marble</button>
-            <button class="bttn-option" role="button" id="bttn-material-2">Material aluminio</button>
-            <button class="bttn-option" role="button" id="bttn-env-1">Env 1</button>
-            <button class="toggle-option" role="button" id="bttn-lights">Toggle Light</button>
-            <button class="bttn-animation" role="button" id="bttn-move">Move</button>
-            <button class="bttn-animation" role="button" id="bttn-move-1">Go back</button>
+        <div class="welcome-window" id="welcome-window">   
+            <button class="bttn-go" role="button" id="bttn-goToConfig"> Start to Configure</button>
         </div>
-        <div class="comparative-layout">
+
+        <div class="configuration-window" id="config-window"> 
+            <!-- Config Aspa -->
+            <div class="config-aspa">
+                <button class="bttn-aspa-option" role="button" id="bttn-aspa-1">Aspa 1 sk1028</button>
+                <button class="bttn-aspa-option" role="button" id="bttn-aspa-2">Aspa 2 sq302</button>
+            </div>
+
+            <!-- Config Mats -->
+            <div class="config-mat">
+                <button class="bttn-mat-option" role="button" id="bttn-material-1">Paint Red</button>
+                <button class="bttn-mat-option" role="button" id="bttn-material-2">Paint Blue</button>
+                <button class="bttn-mat-option" role="button" id="bttn-material-3">Paint White</button>
+            </div>
+
+             <!-- Config Anim-->
+             <div class="config-anim">
+                <button class="bttn-anim-option" role="button" id="bttn-anim-1">Light</button>
+                <button class="bttn-anim-option" role="button" id="bttn-anim-2">Fly</button>
+                <button class="bttn-anim-option" role="button" id="bttn-anim-3">360</button>
+             </div>
+
+            <!-- Go/back To -->
+            <div class="flow-config">
+                <button class="bttn-back" role="button" id="bttn-backToWelcome">Back</button>
+                <button class="bttn-go" role="button" id="bttn-goToComparison">Go</button>  
+            </div>
+            
+
+            <div class="config-label">
+                <div id="label-hull" class="label">
+                    <h4>este es el casco hecho de acero muy resistente</h4>
+                </div>
+                <div id="label-aspa-1" class="label">
+                    <h4>estas son las aspas 1 sk1028</h4>
+                </div>
+                <div id="label-aspa-2" class="label">
+                    <h4>estas son las aspas 2 sq302</h4>
+                </div>
+            </div>
 
         </div>
-        <div class="info">
-            <div id="info-1" class="show-info">
-                <h4>aqui esta toda la info referente a este componente</h4>
+
+
+        <div class="comparative-window" id="comparative-window">
+            <button class="bttn-comparative" role="button" id="bttn-comparative-1">Base Drone</button>
+            <button class="bttn-comparative" role="button" id="bttn-comparative-2">Custom Drone</button>
+
+            <button class="bttn-back" role="button" id="bttn-backToConfig">Back</button>
+           
+            
+            <div class="annotations-comparative">
+
             </div>
         </div>
+
+       
 
 
     </div>
@@ -42,69 +87,81 @@
    
 </body>
  <!-- APP ENTRYPOINT -->
- <script src="./td_main1.js" type="module"></script>
+ <script src="main.js" type="module"></script>
 
  <script>
-    /*
-    async function onClick(event){
-        const target = await SDK3DVerse.engineAPI.castScreenSpaceRay(event.clientX, event.clientY);
-        
-       
-        
+    var isWelcome = true;
+    var isConfiguration = false;
+    var isComparison = false;
 
-        if(!target.pickedPosition) return;
+    var labels = ["label-hull", "label-aspa-1", "label-aspa-2"];
 
-        const clickedEntity = target.entity;
-        console.log("este es la entidad " + target + clickedEntity.getID());
+    //Flow  control of configurator windows
+    document.getElementById("bttn-goToConfig").addEventListener('click', function(){
+        isWelcome = false;
+        isConfiguration = true;
+        isComparison = false;
 
+        HideAllAnotations(labels, "none");
+    });
+    document.getElementById("bttn-backToWelcome").addEventListener('click', function(){
+        isWelcome = true;
+        isConfiguration = false;
+        isComparison = false;
 
-        const nuevaEntity = await SDK3DVerse.engineAPI.getEntity(clickedEntity.getID());
-        console.log("este es mi nueva  entidad " + nuevaEntity);
+        document.getElementById("label-hull").style.display = "none";
+    });
+    document.getElementById("bttn-goToComparison").addEventListener('click', function(){
+        isWelcome = false;
+        isConfiguration = false;
+        isComparison = true;
+        document.getElementById("label-hull").style.display = "none";
+    });
+    document.getElementById("bttn-backToConfig").addEventListener('click', function(){
+        isWelcome = false;
+        isConfiguration = true;
+        isComparison = false;
+        document.getElementById("label-hull").style.display = "none";
+    });
 
-
-        const rootEntities = await SDK3DVerse.engineAPI.getRootEntities();
-        const cilynderEntitiy = rootEntities.find((e) => e.getName() === 'Primitive');
-        const table = rootEntities.find((e) => e.getID() === "2116831720");
-        console.log("la entiedad del root 0 es " + table);
-        nuevaEntity.setVisibility(false);
-        console.log("apague mi nueva enntidad  " + nuevaEntity);
-
-        table21 = await SDK3DVerse.engineAPI.findEntitiesByEUID('9c0901f6-6097-4c6b-9a19-ac463bc09b3a');
-        console.log("apague mi nueva find entity " + table21);
-        table21[0].setVisibility(true);
-        
-       // clickedEntity.setVisibility(true);
-        //var entityTransform = entity.getComponent('local_transform');
-        clickedEntity.select();
-        if(clickedEntity.getID()){
-
+  
+    function HideAllAnotations(labelsArray, visualization){
+        for(let i=0; i < labelsArray.length; i++){
+            document.getElementById(labelsArray[i]).style.display = visualization;
         }
-    };
-    */
-
+    }
+    var lastEntity;
     //  get entities from click
     async function onClick(event){
-    screenTarget = await SDK3DVerse.engineAPI.castScreenSpaceRay(event.clientX, event.clientY);
+        screenTarget = await SDK3DVerse.engineAPI.castScreenSpaceRay(event.clientX, event.clientY);
 
-    if(!screenTarget.pickedPosition) return;
+        if(!screenTarget.pickedPosition) return;
 
-    const clickedEntity = screenTarget.entity;
+        const clickedEntity = screenTarget.entity;
+       
 
-    clickedEntity.select();
+        
 
-    console.log("clickee la entidad", clickedEntity.getEUID());
+        //console.log("clickee la entidad", clickedEntity.getEUID());
+        
+        if(isConfiguration){
+
+             // mostrar una anotacion si se clickea una entidad especifica 
+            if(clickedEntity.getEUID() ==  "de53715b-a4e5-4ff1-8533-1e50c530dda6"){
+                document.getElementById(labels[0]).style.display = "inline";
+                lastEntity = clickedEntity;
+                clickedEntity.select();
+            }
+            else{
+                document.getElementById(labels[0]).style.display = "none";
+                lastEntity.unselect();
+            }
+        }
+        
+    }
+   
+
     
-    
-    // mostrar una anotacion si se clickea una entidad especifica 
-    if(clickedEntity.getEUID() ==  "9c0901f6-6097-4c6b-9a19-ac463bc09b3a"){
-        document.getElementById("info-1").style.display = "inline";
-    }
-    else{
-        document.getElementById("info-1").style.display = "none";
-    }
-
-
-    }
 
     
  </script>
