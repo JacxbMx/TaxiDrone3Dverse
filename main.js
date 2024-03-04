@@ -4,10 +4,20 @@ window.addEventListener("load", initApp);
 var id_publicToken = "public_sjrncx7uplCXGACl";
 var id_sceneUUID = "32b83e58-b5f6-4f5f-89b3-e38bdcac574c";
 
+//drones in scene
 var droneConfigurable = 0;
 var droneOriginal = 0;
 var id_droneConfigurable = 'ceb32cfd-8fed-4f68-9dd9-b55f2612b398';
 var id_droneOriginal = '730e598b-bf9d-4f2f-9071-7032a8ec0366';
+
+//Cameras in scene
+var cameraWelcome = 0;
+var cameraConfig = 0;
+var cameraComparative = 0;
+var cameraAspa = 0;
+var cameraPaint = 0;
+
+
 
 // References to objects in scene
 var hull_ref = 0;
@@ -41,6 +51,15 @@ async function initApp() {
         
     });
 
+    cameraWelcome = await SDK3DVerse.engineAPI.findEntitiesByEUID('409f60e2-6357-4fec-898c-b67e66e0131b');
+    await SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraWelcome[0]);
+
+    cameraComparative = await SDK3DVerse.engineAPI.findEntitiesByEUID('9dc3a767-6359-4c44-9b6a-54721165c269');
+    cameraConfig = await SDK3DVerse.engineAPI.findEntitiesByEUID('d298bd61-8873-4332-8986-70c6a52beac4');
+    cameraAspa = await SDK3DVerse.engineAPI.findEntitiesByEUID('93f88ede-6670-4dd4-bc98-0bd79ab4dd36');
+    cameraPaint = await SDK3DVerse.engineAPI.findEntitiesByEUID('876bf7eb-8678-47f9-abe4-7fa0c68964ba');
+
+    
     SDK3DVerse.updateControllerSetting({
         speed: 0.05,
         sensivity: 0.05,
@@ -50,6 +69,7 @@ async function initApp() {
         
     });
 
+   
     //Set started visualization of UI
     VisibilityConfigurationWindow("none");
     VisibilityComparisonWindow("none");
@@ -72,6 +92,8 @@ async function initApp() {
 
     //Set default configuration of drone
     DefaultConfig();
+
+    
 }
 
 //Default config of drone
@@ -87,21 +109,25 @@ document.getElementById("bttn-goToConfig").addEventListener('click', function(){
     VisbilityWelcomeWindow("none");
     VisibilityConfigurationWindow("inline");
     ConfigDroneVisualization();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
 });
 document.getElementById("bttn-backToWelcome").addEventListener('click', function(){
     VisbilityWelcomeWindow("inline");
     VisibilityConfigurationWindow("none");
     InitDroneVisualization();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraWelcome[0]);
 });
 document.getElementById("bttn-goToComparison").addEventListener('click', function(){
     VisibilityComparisonWindow("inline");
     VisibilityConfigurationWindow("none");
     ComparativeDroneVisualization();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraComparative[0]);
 });
 document.getElementById("bttn-backToConfig").addEventListener('click', function(){
     VisibilityComparisonWindow("none");
     VisibilityConfigurationWindow("inline");
     ConfigDroneVisualization();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
 });
 
 
@@ -120,14 +146,22 @@ function VisibilityComparisonWindow(visbility){
 
 //Config Material Paint Drone
 document.getElementById("bttn-material-1").addEventListener('click', function(){
+
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraPaint[0]);
+
     hull_ref[0].setComponent('material_ref', paint_red);
     console.log('the paint is red');
 });
 document.getElementById("bttn-material-2").addEventListener('click', function(){
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraPaint[0]);
+
+
     hull_ref[0].setComponent('material_ref', paint_blue);
     console.log('the paint is blue');
 });
 document.getElementById("bttn-material-3").addEventListener('click', function(){
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraPaint[0]);
+
     hull_ref[0].setComponent('material_ref', paint_white);
     console.log('the paint is white');
 });
@@ -149,9 +183,11 @@ function PainIsWhite(){
 //Config Lights Drone
 document.getElementById("bttn-anim-1").addEventListener('click', function(){
     if(isLight){
+        SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
         ToggleLights(lights_off, false);
     }
     else if(!isLight){
+        SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
         ToggleLights(lights_on, true);
     }
 });
@@ -186,9 +222,17 @@ function ConfigDroneVisualization(){
 
 function ComparativeDroneVisualization(){
 
-    droneOriginal[0].setGlobalTransform({position : [-3,0,0]});
-    droneConfigurable[0].setGlobalTransform({position : [3,0,0]});
+    droneOriginal[0].setGlobalTransform({position : [-2.5,0,0]});
+    droneConfigurable[0].setGlobalTransform({position : [2.5,0,0]});
 
     droneOriginal[0].setVisibility(true);
     droneConfigurable[0].setVisibility(true);
 }
+
+//Config Animations
+document.getElementById("bttn-aspa-1").addEventListener('click', function(){
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraAspa[0]);
+});
+document.getElementById("bttn-aspa-2").addEventListener('click', function(){
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraAspa[0]);
+});
