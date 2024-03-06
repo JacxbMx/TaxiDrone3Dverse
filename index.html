@@ -87,12 +87,13 @@
    
 </body>
  <!-- APP ENTRYPOINT -->
- <script src="main.js" type="module"></script>
+ <script src="main1.js" type="module"></script>
 
  <script>
     var isWelcome = true;
     var isConfiguration = false;
     var isComparison = false;
+    var id_hull = 'f8e609b9-e766-4e22-970c-6a15ff30aa85';
 
     var labels = ["label-hull", "label-aspa-1", "label-aspa-2"];
 
@@ -147,7 +148,7 @@
         if(isConfiguration){
 
              // mostrar una anotacion si se clickea una entidad especifica 
-            if(clickedEntity.getEUID() ==  "de53715b-a4e5-4ff1-8533-1e50c530dda6"){
+            if(clickedEntity.getEUID() ==  id_hull){
                 document.getElementById(labels[0]).style.display = "inline";
                 lastEntity = clickedEntity;
                 clickedEntity.select();
