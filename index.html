@@ -2,10 +2,28 @@
     <head>
         <meta charset="UTF-8"/>
         <meta  content="width=device-width,initial-scale=1.0" name="viewport"/>
-        <link rel="stylesheet" href="style1.css" />
+        <link rel="stylesheet" href="style.css" />
     </head>
 <body>
-    
+    <div class="header-container">
+        <div>
+            <button class="bttn-flow" role="button" id="bttn-backToWelcome">01
+Home</button>
+        </div>
+        <div>
+            <hr>
+        </div>
+        <div>
+            <button class="bttn-flow" role="button" id="bttn-goToConfig">02 Configuration</button>
+        </div>
+        <div>
+            <hr>
+        </div>
+        <div>
+            <button class="bttn-flow" role="button" id="bttn-goToComparison">03 Comparison</button>  
+        </div>
+
+    </div>
 
     <div class="canvas-container">
         <!-- CANVAS -->
@@ -17,7 +35,7 @@
         ></canvas>
 
         <div class="welcome-window" id="welcome-window">   
-            <button class="bttn-go" role="button" id="bttn-goToConfig"> Start to Configure</button>
+            
         </div>
 
         <div class="configuration-window" id="config-window"> 
@@ -95,6 +113,10 @@
     var isComparison = false;
     var id_hull = 'f8e609b9-e766-4e22-970c-6a15ff30aa85';
 
+    //material selected
+    var paint_select = 0;
+    var id_select_mat = '7d1ce5eb-1d32-4040-978d-00b4108ca480';
+
     var labels = ["label-hull", "label-aspa-1", "label-aspa-2"];
 
     //Flow  control of configurator windows
@@ -102,6 +124,8 @@
         isWelcome = false;
         isConfiguration = true;
         isComparison = false;
+
+        paint_select = {value : id_select_mat};
 
         HideAllAnotations(labels, "none");
     });
@@ -140,10 +164,10 @@
 
         const clickedEntity = screenTarget.entity;
        
-
+        
         
 
-        //console.log("clickee la entidad", clickedEntity.getEUID());
+        console.log("clickee la entidad", clickedEntity.getEUID());
         
         if(isConfiguration){
 
@@ -151,7 +175,8 @@
             if(clickedEntity.getEUID() ==  id_hull){
                 document.getElementById(labels[0]).style.display = "inline";
                 lastEntity = clickedEntity;
-                clickedEntity.select();
+                //clickedEntity.select();
+                //clickedEntity.setComponent('material_ref', paint_select);
             }
             else{
                 document.getElementById(labels[0]).style.display = "none";

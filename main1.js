@@ -86,6 +86,7 @@ async function initApp() {
         
     });
 
+    
     cameraWelcome = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_camera_welcome);
     await SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraWelcome[0]);
 
