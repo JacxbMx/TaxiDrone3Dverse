@@ -86,6 +86,7 @@ async function initApp() {
         
     });
 
+
     cameraWelcome = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_camera_welcome);
     await SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraWelcome[0]);
 
@@ -141,7 +142,7 @@ async function initApp() {
 
 //Default config of drone
 function DefaultConfig(){
-    PainIsRed();
+    PaintIsRed();
     ToggleLights(lights_off, false);
     InitDroneVisualization();
     IdleDroneOriginal();
@@ -150,45 +151,61 @@ function DefaultConfig(){
 }
 
 //Flow  control of configurator windows
-document.getElementById("bttn-goToConfig").addEventListener('click', function(){
+
+//go to config
+document.getElementById("bttn-go-Config").addEventListener('click', function(){
     VisbilityWelcomeWindow("none");
     VisibilityConfigurationWindow("inline");
+    VisibilityComparisonWindow("none");
     ConfigDroneVisualization();
-
     IsStatic0();
-
-
     SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
+
+    //Manage configuration set
+    IsConfigureMats();
 });
-document.getElementById("bttn-backToWelcome").addEventListener('click', function(){
+
+document.getElementById("bttn-start").addEventListener('click', function(){
+    VisbilityWelcomeWindow("none");
+    VisibilityConfigurationWindow("inline");
+    VisibilityComparisonWindow("none");
+    ConfigDroneVisualization();
+    IsStatic0();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
+
+    //Manage configuration set
+    IsConfigureMats();
+});
+
+//go to welcome
+document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
     VisbilityWelcomeWindow("inline");
     VisibilityConfigurationWindow("none");
+    VisibilityComparisonWindow("none");
     InitDroneVisualization();
     SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraWelcome[0]);
 });
-document.getElementById("bttn-goToComparison").addEventListener('click', function(){
-    VisibilityComparisonWindow("inline");
+
+//go tocomparison
+document.getElementById("bttn-go-Comparison").addEventListener('click', function(){
+    VisbilityWelcomeWindow("none");
     VisibilityConfigurationWindow("none");
+    VisibilityComparisonWindow("inline");
+
     ComparativeDroneVisualization();
 
     IsIdle0();
 
     SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraComparative[0]);
 });
-document.getElementById("bttn-backToConfig").addEventListener('click', function(){
-    VisibilityComparisonWindow("none");
-    VisibilityConfigurationWindow("inline");
-    ConfigDroneVisualization();
 
-    IsStatic0();
-    
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
-});
+
 
 
 //Methods to Manage visbility of UI
 function VisbilityWelcomeWindow(visbility){
     document.getElementById("welcome-window").style.display = visbility;
+    document.getElementById("start-button").style.display = visbility;
 }
 
 function VisibilityConfigurationWindow(visbility){
@@ -198,27 +215,73 @@ function VisibilityConfigurationWindow(visbility){
 function VisibilityComparisonWindow(visbility){
     document.getElementById("comparative-window").style.display = visbility;
 }
+//END flow control
+
+document.getElementById("bttn-set-blade").addEventListener('click', function(){
+    IsConfigureBlades();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraAspa[0]);
+});
+document.getElementById("bttn-set-mats").addEventListener('click', function(){
+    IsConfigureMats();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraPaint[0]);
+});
+document.getElementById("bttn-set-anim").addEventListener('click', function(){
+    IsConfigureAnim();
+    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
+});
+
+
+//Methods to manage configuration sets
+function VisibilitySetBlades(visbility){
+    document.getElementById("bttn-aspa-1").style.display = visbility;
+    document.getElementById("bttn-aspa-2").style.display = visbility;
+}
+function VisibilitySetMats(visbility){
+    document.getElementById("bttn-material-1").style.display = visbility;
+    document.getElementById("bttn-material-2").style.display = visbility;
+    document.getElementById("bttn-material-3").style.display = visbility;
+}
+function VisibilitySetAnims(visbility){
+    document.getElementById("bttn-anim-2").style.display = visbility;
+    document.getElementById("bttn-anim-3").style.display = visbility;
+}
+function VisibilitySetLights(visbility){
+    document.getElementById("bttn-anim-1").style.display = visbility;
+}
+
+function IsConfigureBlades(){
+    VisibilitySetBlades("inline");
+    VisibilitySetMats("none");
+    VisibilitySetAnims("none");
+    VisibilitySetLights("none");
+}
+function IsConfigureMats(){
+    VisibilitySetBlades("none");
+    VisibilitySetMats("inline");
+    VisibilitySetAnims("none");
+    VisibilitySetLights("none");
+}
+function IsConfigureAnim(){
+    VisibilitySetBlades("none");
+    VisibilitySetMats("none");
+    VisibilitySetAnims("inline");
+    VisibilitySetLights("none");
+}
+
 
 //Config Material Paint Drone
 document.getElementById("bttn-material-1").addEventListener('click', function(){
-
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraPaint[0]);
-
-    PainIsRed();
+    PaintIsRed();
 });
 document.getElementById("bttn-material-2").addEventListener('click', function(){
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraPaint[0]);
-
-   PainIsBlue();
+   PaintIsBlue();
 });
 document.getElementById("bttn-material-3").addEventListener('click', function(){
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraPaint[0]);
-
-    PainIsWhite();
+    PaintIsWhite();
 });
 
 //Methods to Manage Paint
-function PainIsRed(){
+function PaintIsRed(){
 
     hull_ref[0].setComponent('material_ref', paint_red);
     l_door_paint_ref[0].setComponent('material_ref', paint_red);
@@ -226,13 +289,13 @@ function PainIsRed(){
 
     console.log('the paint is red');
 }
-function PainIsBlue(){
+function PaintIsBlue(){
     hull_ref[0].setComponent('material_ref', paint_blue);
     l_door_paint_ref[0].setComponent('material_ref', paint_blue);
     r_door_paint_ref[0].setComponent('material_ref', paint_blue);
     console.log('the paint is blue');
 }
-function PainIsWhite(){
+function PaintIsWhite(){
     hull_ref[0].setComponent('material_ref', paint_white);
     l_door_paint_ref[0].setComponent('material_ref', paint_white);
     r_door_paint_ref[0].setComponent('material_ref', paint_white);
@@ -242,11 +305,9 @@ function PainIsWhite(){
 //Config Lights Drone
 document.getElementById("bttn-anim-1").addEventListener('click', function(){
     if(isLight){
-        SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
         ToggleLights(lights_off, false);
     }
     else if(!isLight){
-        SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
         ToggleLights(lights_on, true);
     }
 });
@@ -288,20 +349,20 @@ function ComparativeDroneVisualization(){
     droneConfigurable[0].setVisibility(true);
 }
 
-//Config Animations
+//Config blade config
 document.getElementById("bttn-aspa-1").addEventListener('click', function(){
     //TODO aspa 1 anim
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraAspa[0]);
+    console.log("animacion aspa 1");
 });
 document.getElementById("bttn-aspa-2").addEventListener('click', function(){
     //TODO aspa 2 anim
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraAspa[0]);
+    console.log("animacion aspa 2");
 });
 
-document.getElementById("bttn-anim-2").addEventListener('click', function(){
-    //TODO fly anim
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
 
+
+//Config anim
+document.getElementById("bttn-anim-2").addEventListener('click', function(){
     if(!isFlying_0){
         IsIdle0();
     }else if (isFlying_0){
@@ -311,9 +372,6 @@ document.getElementById("bttn-anim-2").addEventListener('click', function(){
    
 });
 document.getElementById("bttn-anim-3").addEventListener('click', function(){
-    //TODO 360 anim
-    SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
-
     if(!is360_0){
         Is3600();
     }else if (is360_0){
@@ -321,7 +379,7 @@ document.getElementById("bttn-anim-3").addEventListener('click', function(){
     }
     
 });
-
+//Methods to anim
 function IdleDroneOriginal(){
     rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isIdle : true, no360 : false, noIdle : false}});
     isFlying_1 = true;
