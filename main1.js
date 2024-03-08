@@ -162,7 +162,7 @@ document.getElementById("bttn-go-Config").addEventListener('click', function(){
     SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
 
     //Manage configuration set
-    IsConfigureMats();
+    isNothingConfigurable();
 });
 
 document.getElementById("bttn-start").addEventListener('click', function(){
@@ -174,12 +174,12 @@ document.getElementById("bttn-start").addEventListener('click', function(){
     SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
 
     //Manage configuration set
-    IsConfigureMats();
+    isNothingConfigurable()
 });
 
 //go to welcome
 document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
-    VisbilityWelcomeWindow("inline");
+    VisbilityWelcomeWindow("flex");
     VisibilityConfigurationWindow("none");
     VisibilityComparisonWindow("none");
     InitDroneVisualization();
@@ -262,21 +262,26 @@ function IsConfigureBlades(){
     VisibilitySetBlades("inline");
     VisibilitySetMats("none");
     VisibilitySetAnims("none");
-    VisibilitySetLights("none");
+    //VisibilitySetLights("none");
 }
 function IsConfigureMats(){
     VisibilitySetBlades("none");
     VisibilitySetMats("inline");
     VisibilitySetAnims("none");
-    VisibilitySetLights("none");
+    //VisibilitySetLights("none");
 }
 function IsConfigureAnim(){
     VisibilitySetBlades("none");
     VisibilitySetMats("none");
     VisibilitySetAnims("inline");
-    VisibilitySetLights("none");
+    //VisibilitySetLights("none");
 }
-
+function isNothingConfigurable(){
+    VisibilitySetBlades("none");
+    VisibilitySetMats("none");
+    VisibilitySetAnims("none");
+    //VisibilitySetLights("none");
+}
 
 //Config Material Paint Drone
 document.getElementById("bttn-material-1").addEventListener('click', function(){

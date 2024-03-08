@@ -37,12 +37,12 @@
         <!-- WELCOME UI -->
         <div class="welcome-window" id="welcome-window">
             <div class="welcome-title">
-                <h2>X 7926R</h2>
-                <h5>BY PREFIXA</h5>
+                <button class="txt-name-drone" role="button" id="txt-name-drone">X 7926R</button>
+                <button class="txt-name-pfx" role="button" id="txt-name-pfx">BY PREFIXA</button>
             </div>
             <div class="welcome-text">
-                <h6>Autonomous self-flying taxi drone X 7926R brings a business experience, an executive transportation aircraft, allowing to reach important meetings by skipping the expected traffic delays.
-                </h6>
+                <button class="txt-info-drone" role="button" id="txt-info-drone">Autonomous self-flying taxi drone X 7926R brings a business experience, an executive transportation aircraft, allowing to reach important meetings by skipping the expected traffic delays.
+                </button>
             </div>
         </div>
         <div class="start-button" id="start-button">
@@ -108,43 +108,56 @@
 
             </div>            
 
-            <div class="config-set-lights">
-
-                <div class="config-light">
-                    <div>
-                        <button class="bttn-light-toggle" role="button" id="bttn-anim-1">Light</button>
-                    </div>
-                </div>
-
-            </div>
-
+           
                      
 
-            <div class="config-label">
-                <div id="label-hull" class="label">
-                    <h4>este es el casco hecho de acero muy resistente</h4>
-                </div>
-                <div id="label-aspa-1" class="label">
-                    <h4>estas son las aspas 1 sk1028</h4>
-                </div>
-                <div id="label-aspa-2" class="label">
-                    <h4>estas son las aspas 2 sq302</h4>
+          
+
+        </div>
+
+        <div class="config-set-lights">
+            <div class="config-light">
+                <div>
+                    <button class="bttn-light-toggle" role="button" id="bttn-anim-1">Light</button>
                 </div>
             </div>
+        </div>
 
+
+        <div class="config-set-labels">
+                <div>
+                    <button class="txt-label" role="button" id="txt-label-1">El casco del modelo X7926R es una de las mayores innovaciones de nuestros tiempos la combinacion de fibra de carbono y keblar otorga al casco una resistencia y ligereza sin precedentes</button>
+                </div>
         </div>
 
         
         <!-- Comparative UI -->
         <div class="comparative-window" id="comparative-window">
-            <button class="bttn-comparative" role="button" id="bttn-comparative-1">Base Drone</button>
-            <button class="bttn-comparative" role="button" id="bttn-comparative-2">Custom Drone</button>
-  
-            <div class="annotations-comparative">
-
+            
+            <div class="comparative-custom">
+                <button class="bttn-comparative" role="button" id="bttn-comparative-2">Custom Drone</button>
             </div>
+            
         </div>
 
+        <div class="comparative-original">
+            <button class="bttn-comparative" role="button" id="bttn-comparative-1">Base Drone</button>
+        </div>
+        <div class="comparative-custom">
+            <button class="bttn-comparative" role="button" id="bttn-comparative-2">Custom Drone</button>
+        </div>
+        <div class="original-info">
+            <button class="txt-original-info" role="button" id="txt-info-original">Specs orginal drone
+                Aspa
+                paint
+            </button>
+        </div>
+        <div class="custom-info">
+            <button class="txt-custom-info" role="button" id="txt-info-custom">Specs custom drone
+                Aspa
+                paint
+            </button>
+        </div>
        
 
 
@@ -160,6 +173,7 @@
  <script src="main1.js" type="module"></script>
 
  <script>
+    /*
     var isWelcome = true;
     var isConfiguration = false;
     var isComparison = false;
@@ -245,7 +259,7 @@
 
     
 
-    
+    */
  </script>
 
 
