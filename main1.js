@@ -235,15 +235,24 @@ document.getElementById("bttn-set-anim").addEventListener('click', function(){
 function VisibilitySetBlades(visbility){
     document.getElementById("bttn-aspa-1").style.display = visbility;
     document.getElementById("bttn-aspa-2").style.display = visbility;
+    document.getElementById("txt-aspa-1").style.display = visbility;
+    document.getElementById("txt-aspa-2").style.display = visbility;
 }
 function VisibilitySetMats(visbility){
     document.getElementById("bttn-material-1").style.display = visbility;
     document.getElementById("bttn-material-2").style.display = visbility;
     document.getElementById("bttn-material-3").style.display = visbility;
+    document.getElementById("bttn-material-4").style.display = visbility;
+    document.getElementById("txt-material-1").style.display = visbility;
+    document.getElementById("txt-material-2").style.display = visbility;
+    document.getElementById("txt-material-3").style.display = visbility;
+    document.getElementById("txt-material-4").style.display = visbility;
 }
 function VisibilitySetAnims(visbility){
     document.getElementById("bttn-anim-2").style.display = visbility;
     document.getElementById("bttn-anim-3").style.display = visbility;
+    document.getElementById("txt-anim-2").style.display = visbility;
+    document.getElementById("txt-anim-3").style.display = visbility;
 }
 function VisibilitySetLights(visbility){
     document.getElementById("bttn-anim-1").style.display = visbility;
