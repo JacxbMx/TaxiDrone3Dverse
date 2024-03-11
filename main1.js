@@ -7,8 +7,8 @@ var id_sceneUUID = "32b83e58-b5f6-4f5f-89b3-e38bdcac574c";
 //drones in scene
 var droneConfigurable = 0;
 var droneOriginal = 0;
-var id_droneConfigurable = '344ee681-6918-4b0b-bc52-41213f8830c9';
-var id_droneOriginal = '4449b05e-447c-4db0-ba20-c9c0da29a64a';
+var id_droneConfigurable = '19119c4c-bea5-4ffb-81a0-c98b6e6533fa';
+var id_droneOriginal = '22cfb5af-ebc8-4cff-9259-9e06f3062d70';
 
 
 //Animation
