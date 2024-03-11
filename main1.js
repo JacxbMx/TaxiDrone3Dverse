@@ -7,8 +7,8 @@ var id_sceneUUID = "32b83e58-b5f6-4f5f-89b3-e38bdcac574c";
 //drones in scene
 var droneConfigurable = 0;
 var droneOriginal = 0;
-var id_droneConfigurable = '344ee681-6918-4b0b-bc52-41213f8830c9';
-var id_droneOriginal = '4449b05e-447c-4db0-ba20-c9c0da29a64a';
+var id_droneConfigurable = '19119c4c-bea5-4ffb-81a0-c98b6e6533fa';
+var id_droneOriginal = '22cfb5af-ebc8-4cff-9259-9e06f3062d70';
 
 
 //Animation
@@ -162,7 +162,7 @@ document.getElementById("bttn-go-Config").addEventListener('click', function(){
     SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
 
     //Manage configuration set
-    IsConfigureMats();
+    isNothingConfigurable();
 });
 
 document.getElementById("bttn-start").addEventListener('click', function(){
@@ -174,12 +174,12 @@ document.getElementById("bttn-start").addEventListener('click', function(){
     SDK3DVerse.engineAPI.cameraAPI.setMainCamera(cameraConfig[0]);
 
     //Manage configuration set
-    IsConfigureMats();
+    isNothingConfigurable()
 });
 
 //go to welcome
 document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
-    VisbilityWelcomeWindow("inline");
+    VisbilityWelcomeWindow("flex");
     VisibilityConfigurationWindow("none");
     VisibilityComparisonWindow("none");
     InitDroneVisualization();
@@ -262,21 +262,26 @@ function IsConfigureBlades(){
     VisibilitySetBlades("inline");
     VisibilitySetMats("none");
     VisibilitySetAnims("none");
-    VisibilitySetLights("none");
+    //VisibilitySetLights("none");
 }
 function IsConfigureMats(){
     VisibilitySetBlades("none");
     VisibilitySetMats("inline");
     VisibilitySetAnims("none");
-    VisibilitySetLights("none");
+    //VisibilitySetLights("none");
 }
 function IsConfigureAnim(){
     VisibilitySetBlades("none");
     VisibilitySetMats("none");
     VisibilitySetAnims("inline");
-    VisibilitySetLights("none");
+    //VisibilitySetLights("none");
 }
-
+function isNothingConfigurable(){
+    VisibilitySetBlades("none");
+    VisibilitySetMats("none");
+    VisibilitySetAnims("none");
+    //VisibilitySetLights("none");
+}
 
 //Config Material Paint Drone
 document.getElementById("bttn-material-1").addEventListener('click', function(){
