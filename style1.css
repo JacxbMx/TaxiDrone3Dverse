@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('fonts/Ethnocentric\ Light.otf');
+}
 
-  
   body{
     background-color: #070707;
     padding: 0px;
@@ -30,7 +34,8 @@
   .bttn-flow-1{
     height: 34px;
     white-space: break-spaces;
-    /*font-family:;*/
+    font-family:"Saira", sans-serif;
+    font-weight:400;
     font-size: .7rem;
     color: #E3FE75;
     background-color: transparent;
@@ -68,13 +73,13 @@
  .welcome-window{
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: start;
   justify-content: center;
-  height: 20%;
+  height: 40%;
   width: 100%;
   position: absolute;
   top: 0px;
-  background-color: #1f1f1fb6;
+  background-image: linear-gradient(#000000dc,transparent);
  }
  .welcome-title{
   width: 50%;
@@ -89,18 +94,20 @@
 .txt-name-drone{
   height: 80px;
   background-color: transparent;
-  /*font-family:;*/
-  font-size: 60;
+  font-family:"Ethnocentric";
+  font-size: 56;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
   margin-left: 48px;
+  margin-top: 8px;
 }
 .txt-name-pfx{
   height: 32px;
   background-color: transparent;
-  /*font-family:;*/
-  font-size: 22;
+  font-family:"Ethnocentric";
+  font-weight: lighter;
+  font-size: 16;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
@@ -110,36 +117,71 @@
   height: 120px;
   background-color: transparent;
   white-space: break-spaces;
-  /*font-family:;*/
-  font-size: 16;
+  font-family:"Saira", sans-serif;
+  font-weight:350;
+  font-style: italic;
+  font-size: 14;
+  text-align: start;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
+  margin-left: 96px;
   margin-right: 80px;
+  margin-top: 24px;
+  letter-spacing: 1.5px;
 }
 
 
 
 
 .start-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  bottom: 40px;
+  right: 200px;
+  bottom: 48px;
+
+  background-color: #1f1f1fb6;
+  border-radius: 10px 10px 10px 10px;
 }
 .bttn-start{
-  width: 184px;
-  height: 40px;
+  width: 40px;
+  height: 48px;
   white-space: break-spaces;
-  /*font-family:;*/
-  font-size: .7rem;
+  font-family:"Saira", sans-serif;
+  font-weight:400;
+  font-size: .8rem;
   color: rgb(255, 255, 255);
   background-color: transparent;
-  border: solid #ffffff 1px;
-  border-radius: 100px 100px 100px 100px;
-  background-color: none;
+  border: solid #ffffff 0px;
+  border-radius: 10px 10px 10px 10px;
+  background-image:url("icons/starticon.png");
+  background-repeat:no-repeat;
+  background-size: 32px 32px;
+  background-position:center;
+  box-sizing: border-box;
+  margin-left: 32px;
+  margin-right: 0;
+}
+.bttn-start-1{
+width: 240px;
+height: 40px;
+white-space: break-spaces;
+font-family:"Saira", sans-serif;
+font-weight:400;
+font-size: .8rem;
+color: rgb(255, 255, 255);
+background-color: transparent;
+border: solid #ffffff 0px;
+border-radius: 10px 10px 10px 10px;
+background-color: none;
+margin-left: 0px;
+margin-right: 16px;
 }
 
 
-  
+
 
 
 
@@ -161,10 +203,11 @@
   justify-content: center;
 }
 .bttn-set{
-  width: 128px;
-  height: 28px;
-  /*font-family:;*/
-  font-size: .7rem;
+  width: 144px;
+  height: 32px;
+  font-family:"Saira", sans-serif;
+  font-weight:400;
+  font-size: .85rem;
   color: rgb(255, 255, 255);
   background-color:#070707d2 ;
   border: solid #ffffff 0px;
@@ -193,7 +236,8 @@
   width: 60px;
   height: 60px;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   font-size: .7rem;
   color: rgb(255, 255, 255);
   border: solid #ffffff 0px;
@@ -212,7 +256,8 @@
   width: 60px;
   height: 60px;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   font-size: .7rem;
   color: rgb(255, 255, 255);
   border: solid #ffffff 0px;
@@ -243,7 +288,8 @@
     width: 60px;
     height: 60px;
     white-space: break-spaces;
-    /*font-family:;*/
+    font-family:"Saira", sans-serif;
+    font-weight:400;
     font-size: .7rem;
     color: rgb(255, 255, 255);
     background-color: transparent;
@@ -265,7 +311,8 @@
   width: 60px;
   height: 60px;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   font-size: .7rem;
   color: rgb(255, 255, 255);
   background-color: transparent ;
@@ -288,7 +335,8 @@
   width: 60px;
   height: 60px;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   font-size: .7rem;
   color: rgb(255, 255, 255);
   background-color: #2F239B ;
@@ -311,7 +359,8 @@
   width: 60px;
   height: 60px;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   font-size: .7rem;
   color: rgb(255, 255, 255);
   background-color: #171714 ;
@@ -331,6 +380,8 @@
 }
 .text-mat-option{
   width: 120px;
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   font-size: .8rem;
     color: rgb(255, 255, 255);
     background-color: transparent ;
@@ -425,6 +476,8 @@
 .text-light-toggle{
   width: 120px;
   font-size: .8rem;
+  font-family:"Saira", sans-serif;
+  font-weight:400;
     color: rgb(255, 255, 255);
     background-color: transparent ;
     border: solid #ffffff 0px;
@@ -451,7 +504,8 @@
   height: 200px;
   font-size: 12;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;

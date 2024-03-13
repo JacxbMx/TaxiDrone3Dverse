@@ -375,6 +375,9 @@ document.getElementById("bttn-go-Config").addEventListener('click', function(){
 document.getElementById("bttn-start").addEventListener('click', function(){
     ConfigWindow();
 });
+document.getElementById("bttn-start-1").addEventListener('click', function(){
+    ConfigWindow();
+});
 
 //go to welcome
 document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
