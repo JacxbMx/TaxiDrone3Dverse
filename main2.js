@@ -555,6 +555,10 @@ function ComparativeDroneVisualization(){
 document.getElementById("bttn-anim-2").addEventListener('click', function(){
     if(!isHover_0){
         IsHover0();
+        document.getElementById("bttn-anim-2").style.backgroundImage = "url('icons/icon_hover_on.png')";
+        document.getElementById("bttn-anim-3").style.backgroundImage = "url('icons/icon_360.png')";
+        SelectButtonOption("bttn-anim-2","txt-anim-2");
+        UnselectButtonOption("bttn-anim-3","txt-anim-3");
     }else if (isHover_0){
         IsStatic0();
     }
@@ -564,6 +568,10 @@ document.getElementById("bttn-anim-2").addEventListener('click', function(){
 document.getElementById("bttn-anim-3").addEventListener('click', function(){
     if(!is360_0){
         Is3600();
+        document.getElementById("bttn-anim-3").style.backgroundImage = "url('icons/icon_360_on.png')";
+        document.getElementById("bttn-anim-2").style.backgroundImage = "url('icons/icon_hover.png')";
+        SelectButtonOption("bttn-anim-3","txt-anim-3");
+        UnselectButtonOption("bttn-anim-2","txt-anim-2");
     }else if (is360_0){
         IsStatic0();
     }
@@ -609,6 +617,8 @@ document.getElementById("bttn-aspa-1").addEventListener('click', function(){
     if(isAspa != 0){
         SelectButtonOption("bttn-aspa-1","txt-aspa-1");
         UnselectButtonOption("bttn-aspa-2","txt-aspa-2");
+        document.getElementById("bttn-aspa-1").style.backgroundImage = "url('icons/icon_aspa1_on.png')";
+        document.getElementById("bttn-aspa-2").style.backgroundImage = "url('icons/icon_aspa2.png')";
 
         StartBladeChange();
         const enableBlade2IDtimeout = setTimeout(DCBlade1,4000);
@@ -622,6 +632,8 @@ document.getElementById("bttn-aspa-2").addEventListener('click', function(){
     if(isAspa != 1){
         SelectButtonOption("bttn-aspa-2","txt-aspa-2");
         UnselectButtonOption("bttn-aspa-1","txt-aspa-1");
+        document.getElementById("bttn-aspa-2").style.backgroundImage = "url('icons/icon_aspa2_on.png')";
+        document.getElementById("bttn-aspa-1").style.backgroundImage = "url('icons/icon_aspa1.png')";
     
         StartBladeChange();
         const enableBlade2IDtimeout = setTimeout(DCBlade2,4000);
