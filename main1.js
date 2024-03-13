@@ -121,9 +121,24 @@ window.addEventListener("load", initApp);
         var isAspa = 0;
         var isPaint = 0;
 
+
+        //button sets
+        var isConfigureBlades = false;
+        var isConfigureMats = false;
+        var isConfigureAnims = false;
+
+        //mats
+        var isVermillon = true;
+        var isCobalt = false;
+        var isNavy = false;
+        var isBlack = false;
+
     // color
     var greenColor = 'E3FE75';
     var whiteColor = 'ffffff';
+    var blackColor = '#070707d2';
+    var blackFont = '000000';
+    var whitheFont = 'ffffff';
 
 
 async function initApp() {
@@ -185,7 +200,7 @@ async function initApp() {
 
 //Default config of drone
 function DefaultConfig(){
-    PaintIs(paint_vermillon);
+    PaintIsVermillon();
     ToggleLights(lights_off, a_lights_off_mat, dc_a_lights_ref, false);
     InitDroneVisualization();
     IdleDroneOriginal();
@@ -389,22 +404,27 @@ function VisibilityComparisonWindow(visbility){
 //END flow control
 
 document.getElementById("bttn-set-blade").addEventListener('click', function(){
-    IsConfigureBlades();
 
-    //camera
-    SetCamera(cameraAspa);
+    if(!isConfigureBlades){
+        IsConfigureBlades();
+    }else if (isConfigureBlades){
+        isNothingConfigurable();
+    }
 });
 document.getElementById("bttn-set-mats").addEventListener('click', function(){
-    IsConfigureMats();
 
-    //camera
-    SetCamera(cameraPaint);
+    if(!isConfigureMats){
+        IsConfigureMats();
+    }else if (isConfigureMats){
+        isNothingConfigurable();
+    }
 });
 document.getElementById("bttn-set-anim").addEventListener('click', function(){
-    IsConfigureAnim();
-    
-    //camera
-    SetCamera(cameraConfig);
+    if(!isConfigureAnims){
+        IsConfigureAnim();
+    }else if(isConfigureAnims){
+        isNothingConfigurable();
+    }
 });
 
 
@@ -439,52 +459,105 @@ function IsConfigureBlades(){
     VisibilitySetBlades("inline");
     VisibilitySetMats("none");
     VisibilitySetAnims("none");
+
+    isConfigureBlades = true;
+    isConfigureMats = false;
+    isConfigureAnims = false;
+
+    //Update buttons
+    document.getElementById("bttn-set-blade").style.backgroundColor = greenColor;
+    document.getElementById("bttn-set-blade").style.color = blackFont;
+
+    document.getElementById("bttn-set-mats").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-mats").style.color = whitheFont;
+
+    document.getElementById("bttn-set-anim").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-anim").style.color = whitheFont;
+    
+    //camera
+    SetCamera(cameraAspa);
+
+    
 }
 function IsConfigureMats(){
     VisibilitySetBlades("none");
     VisibilitySetMats("inline");
     VisibilitySetAnims("none");
+
+    isConfigureBlades = false;
+    isConfigureMats = true;
+    isConfigureAnims = false;
+    
+    //Update buttons
+    document.getElementById("bttn-set-blade").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-blade").style.color = whitheFont;
+
+    document.getElementById("bttn-set-mats").style.backgroundColor = greenColor;
+    document.getElementById("bttn-set-mats").style.color = blackFont;
+
+    document.getElementById("bttn-set-anim").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-anim").style.color = whitheFont;
+
+      //camera
+      SetCamera(cameraPaint);
 }
 function IsConfigureAnim(){
     VisibilitySetBlades("none");
     VisibilitySetMats("none");
     VisibilitySetAnims("inline");
+    
+    isConfigureBlades = false;
+    isConfigureMats = false;
+    isConfigureAnims = true;
+
+    //Update buttons
+    document.getElementById("bttn-set-blade").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-blade").style.color = whitheFont;
+
+    document.getElementById("bttn-set-mats").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-mats").style.color = whitheFont;
+
+    document.getElementById("bttn-set-anim").style.backgroundColor = greenColor;
+    document.getElementById("bttn-set-anim").style.color = blackFont;
+
+   //camera
+   SetCamera(cameraConfig); 
 }
 function isNothingConfigurable(){
     VisibilitySetBlades("none");
     VisibilitySetMats("none");
     VisibilitySetAnims("none");
+
+    isConfigureBlades = false;
+    isConfigureMats = false;
+    isConfigureAnims = false;
+
+    //Update buttons
+    document.getElementById("bttn-set-blade").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-blade").style.color = whitheFont;
+
+    document.getElementById("bttn-set-mats").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-mats").style.color = whitheFont;
+
+    document.getElementById("bttn-set-anim").style.backgroundColor = blackColor;
+    document.getElementById("bttn-set-anim").style.color = whitheFont;
+
+    //camera
+    SetCamera(cameraConfig);
 }
 
 //Config Material Paint Drone
 document.getElementById("bttn-material-1").addEventListener('click', function(){
-    PaintIs(paint_vermillon);
-    SelectButtonOption("bttn-material-1","txt-material-1");
-    UnselectButtonOption("bttn-material-2","txt-material-2");
-    UnselectButtonOption("bttn-material-3","txt-material-3");
-    UnselectButtonOption("bttn-material-4","txt-material-4");
+    PaintIsVermillon();
 });
 document.getElementById("bttn-material-2").addEventListener('click', function(){
-   PaintIs(paint_cobalt);
-   SelectButtonOption("bttn-material-2","txt-material-2");
-   UnselectButtonOption("bttn-material-1","txt-material-1");
-    UnselectButtonOption("bttn-material-3","txt-material-3");
-    UnselectButtonOption("bttn-material-4","txt-material-4");
+    PaintIsCobalt();
 });
 document.getElementById("bttn-material-3").addEventListener('click', function(){
-    PaintIs(paint_navy);
-    SelectButtonOption("bttn-material-3","txt-material-3");
-    UnselectButtonOption("bttn-material-2","txt-material-2");
-    UnselectButtonOption("bttn-material-1","txt-material-1");
-    UnselectButtonOption("bttn-material-4","txt-material-4");
-
+    PaintIsNavy();
 });
 document.getElementById("bttn-material-4").addEventListener('click', function(){
-    PaintIs(paint_black);
-    SelectButtonOption("bttn-material-4","txt-material-4");
-    UnselectButtonOption("bttn-material-2","txt-material-2");
-    UnselectButtonOption("bttn-material-3","txt-material-3");
-    UnselectButtonOption("bttn-material-1","txt-material-1");
+    PaintIsBlack();
 
 });
 
@@ -494,7 +567,58 @@ function PaintIs(paintMat){
     l_door_paint_ref.setComponent('material_ref', paintMat);
     r_door_paint_ref.setComponent('material_ref', paintMat);
 }
+function PaintIsVermillon(){
+    PaintIs(paint_vermillon);
 
+    SelectButtonOption("bttn-material-1","txt-material-1");
+    UnselectButtonOption("bttn-material-2","txt-material-2");
+    UnselectButtonOption("bttn-material-3","txt-material-3");
+    UnselectButtonOption("bttn-material-4","txt-material-4");
+
+    isVermillon = true;
+    isCobalt = false;
+    isNavy = false;
+    isBlack = false;
+}
+function PaintIsCobalt(){
+    PaintIs(paint_cobalt);
+
+    SelectButtonOption("bttn-material-2","txt-material-2");
+    UnselectButtonOption("bttn-material-1","txt-material-1");
+    UnselectButtonOption("bttn-material-3","txt-material-3");
+    UnselectButtonOption("bttn-material-4","txt-material-4");
+
+    isVermillon = false;
+    isCobalt = true;
+    isNavy = false;
+    isBlack = false;
+}
+function PaintIsNavy(){
+    PaintIs(paint_navy);
+
+    SelectButtonOption("bttn-material-3","txt-material-3");
+    UnselectButtonOption("bttn-material-2","txt-material-2");
+    UnselectButtonOption("bttn-material-1","txt-material-1");
+    UnselectButtonOption("bttn-material-4","txt-material-4");
+
+    isVermillon = false;
+    isCobalt = false;
+    isNavy = true;
+    isBlack = false;
+}
+function PaintIsBlack(){
+    PaintIs(paint_black);
+
+    SelectButtonOption("bttn-material-4","txt-material-4");
+    UnselectButtonOption("bttn-material-2","txt-material-2");
+    UnselectButtonOption("bttn-material-3","txt-material-3");
+    UnselectButtonOption("bttn-material-1","txt-material-1");
+
+    isVermillon = false;
+    isCobalt = false;
+    isNavy = false;
+    isBlack = true;
+}
 
 //Config Lights Drone
 document.getElementById("bttn-anim-1").addEventListener('click', function(){
