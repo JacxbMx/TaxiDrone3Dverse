@@ -104,6 +104,21 @@ window.addEventListener("load", initApp);
     var id_dc_a_lights = ['9b051f33-8a70-474e-ab40-8b8272443915', '4b41f270-bd75-4d8c-a8f1-0eeca1792384', 'f37dfe32-5b74-4d7a-a58e-0e0b96c67949', '4fa1987f-ea28-4530-a556-bb8574343ceb'
                         ,'3d741380-014a-43f4-b442-7e23a38137ea',  '62ec45b3-1b22-483f-8cc8-94d196809ca6','401db2cf-9084-450a-9eb1-9d64f05a503e','e1494db7-82d2-4fe0-a36b-841c9e6ec513'] ;
 
+
+    //icons
+
+    var icon_hover_on = "url('icons/icon_hover_on.png')";
+    var icon_hover_off = "url('icons/icon_hover.png')" ;
+    var icon_360_on = "url('icons/icon_360_on.png')";
+    var icon_360_off = "url('icons/icon_360.png')";
+    var icon_aspa1_on = "url('icons/icon_aspa1_on.png')";
+    var icon_aspa1_off = "url('icons/icon_aspa1.png')";
+    var icon_aspa2_on = "url('icons/icon_aspa2_on.png')";
+    var icon_aspa2_off = "url('icons/icon_aspa2.png')";
+    var icon_light_on = "url('icons/l1.png')";
+    var icon_light_off = "url('icons/l2.png')" ;
+            
+
     //CONDITIONS 
 
         //Animation parameters
@@ -132,6 +147,11 @@ window.addEventListener("load", initApp);
         var isCobalt = false;
         var isNavy = false;
         var isBlack = false;
+
+        //windows
+        var isHome = true;
+        var isConfig = false;
+        var isComaprative = false;
 
     // color
     var greenColor = 'E3FE75';
@@ -196,6 +216,10 @@ async function initApp() {
     
     DefaultConfig();
 
+    document.getElementById("bttn-go-Welcome").style.color = greenColor;
+    document.getElementById("bttn-go-Config").style.color = whitheFont;
+    document.getElementById("bttn-go-Comparison").style.color = whitheFont;
+
 }
 
 //Default config of drone
@@ -259,6 +283,7 @@ async function SetMaterialsReferences(){
 
 async function IntitUI(){
     //Set started visualization of UI
+    VisbilityWelcomeWindow("flex");
     VisibilityConfigurationWindow("none");
     VisibilityComparisonWindow("none");
 }
@@ -279,18 +304,18 @@ async function GetEntityOfArray(idsArray, entityArray){
 }
 
 
-function SetVisibilityBlades(entityArray, visibility){
+async function SetVisibilityBlades(entityArray, visibility){
     for(let i = 0; i < entityArray.length; i++){
         entityArray[i].setVisibility(visibility);
     }
 }
-function SetVisibilityBlades2(entityArray, entitiyArray2, visibility){
+async function SetVisibilityBlades2(entityArray, entitiyArray2, visibility){
     for(let i = 0; i < entityArray.length; i++){
         entityArray[i].setVisibility(visibility);
         entitiyArray2[i].setVisibility(visibility);
     }
 }
-function DOBlade1(){
+async function DOBlade1(){
     SetVisibilityBlades(do_aspa1_fl, true);
     SetVisibilityBlades(do_aspa1_fr, true);
     SetVisibilityBlades(do_aspa1_bl, true);
@@ -300,7 +325,7 @@ function DOBlade1(){
     SetVisibilityBlades(do_aspa2_bl, false);
     SetVisibilityBlades(do_aspa2_br, false);
 }
-function DCBlade1(){
+async function DCBlade1(){
     SetVisibilityBlades(dc_aspa1_fl, true);
     SetVisibilityBlades(dc_aspa1_fr, true);
     SetVisibilityBlades(dc_aspa1_bl, true);
@@ -310,7 +335,7 @@ function DCBlade1(){
     SetVisibilityBlades(dc_aspa2_bl, false);
     SetVisibilityBlades(dc_aspa2_br, false);
 }
-function DCBlade2(){
+async function DCBlade2(){
     SetVisibilityBlades(dc_aspa1_fl, false);
     SetVisibilityBlades(dc_aspa1_fr, false);
     SetVisibilityBlades(dc_aspa1_bl, false);
@@ -327,6 +352,26 @@ function DCBlade2(){
 
 //go to config
 document.getElementById("bttn-go-Config").addEventListener('click', function(){
+    ConfigWindow();
+});
+
+
+document.getElementById("bttn-start").addEventListener('click', function(){
+    ConfigWindow();
+});
+
+//go to welcome
+document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
+    WelcomeWindow();
+});
+
+//go tocomparison
+document.getElementById("bttn-go-Comparison").addEventListener('click', function(){
+   ComparativeWindow();
+});
+
+
+function ConfigWindow(){
     VisbilityWelcomeWindow("none");
     VisibilityConfigurationWindow("flex");
     VisibilityComparisonWindow("none");
@@ -338,27 +383,17 @@ document.getElementById("bttn-go-Config").addEventListener('click', function(){
 
     //Manage configuration set
     isNothingConfigurable();
-});
-
-document.getElementById("bttn-start").addEventListener('click', function(){
-    VisbilityWelcomeWindow("none");
-    VisibilityConfigurationWindow("flex");
-    VisibilityComparisonWindow("none");
-    ConfigDroneVisualization();
-    IsStatic0();
-
-    //camera
-    SetCamera(cameraConfig);
-
-    //Manage configuration set
-    isNothingConfigurable()
 
     //HideAspa1FL();
     DCBlade1();
-});
 
-//go to welcome
-document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
+    //UpdateButtos
+    document.getElementById("bttn-go-Welcome").style.color = whitheFont;
+    document.getElementById("bttn-go-Config").style.color = greenColor;
+    document.getElementById("bttn-go-Comparison").style.color = whiteColor;
+}
+
+function WelcomeWindow(){
     VisbilityWelcomeWindow("flex");
     VisibilityConfigurationWindow("none");
     VisibilityComparisonWindow("none");
@@ -366,10 +401,12 @@ document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
     
     //camera
     SetCamera(cameraWelcome);
-});
 
-//go tocomparison
-document.getElementById("bttn-go-Comparison").addEventListener('click', function(){
+    document.getElementById("bttn-go-Welcome").style.color = greenColor;
+    document.getElementById("bttn-go-Config").style.color = whitheFont;
+    document.getElementById("bttn-go-Comparison").style.color = whitheFont;
+}
+function ComparativeWindow(){
     VisbilityWelcomeWindow("none");
     VisibilityConfigurationWindow("none");
     VisibilityComparisonWindow("flex");
@@ -380,10 +417,11 @@ document.getElementById("bttn-go-Comparison").addEventListener('click', function
 
     //camera
     SetCamera(cameraComparative);
-});
 
-
-
+    document.getElementById("bttn-go-Welcome").style.color = whitheFont;
+    document.getElementById("bttn-go-Config").style.color = whitheFont;
+    document.getElementById("bttn-go-Comparison").style.color = greenColor;
+}
 
 //Methods to Manage visbility of UI
 function VisbilityWelcomeWindow(visbility){
@@ -623,15 +661,15 @@ function PaintIsBlack(){
 //Config Lights Drone
 document.getElementById("bttn-anim-1").addEventListener('click', function(){
     if(isLight){
-        ToggleLights(lights_off, a_lights_off_mat, dc_a_lights_ref, false);
+        ToggleLights(lights_off, a_lights_off_mat, dc_a_lights_ref, false, whitheFont, icon_light_off );
     }
     else if(!isLight){
-        ToggleLights(lights_on, a_lights_on_mat, dc_a_lights_ref, true);
+        ToggleLights(lights_on, a_lights_on_mat, dc_a_lights_ref, true, greenColor, icon_light_on );
     }
 });
 
 //Methods to manage lights
-function ToggleLights(fLightsMat, aLightsMat, arrayBlade1Lights, statusLight){
+function ToggleLights(fLightsMat, aLightsMat, arrayBlade1Lights, statusLight,colorText, icon){
     //toggle front lights
     dc_f_lights_ref[0].setComponent('material_ref',fLightsMat);
     
@@ -639,7 +677,14 @@ function ToggleLights(fLightsMat, aLightsMat, arrayBlade1Lights, statusLight){
     for(let i = 0; i < arrayBlade1Lights.length; i++){
         arrayBlade1Lights[i].setComponent('material_ref',aLightsMat);
     }
-     isLight = statusLight;
+
+    isLight = statusLight;
+
+
+    document.getElementById("txt-anim-1").style.color = colorText;
+    document.getElementById("bttn-anim-1").style.backgroundImage = icon;
+
+
 }
 
 
@@ -679,8 +724,8 @@ function ComparativeDroneVisualization(){
 document.getElementById("bttn-anim-2").addEventListener('click', function(){
     if(!isHover_0){
         IsHover0();
-        document.getElementById("bttn-anim-2").style.backgroundImage = "url('icons/icon_hover_on.png')";
-        document.getElementById("bttn-anim-3").style.backgroundImage = "url('icons/icon_360.png')";
+        document.getElementById("bttn-anim-2").style.backgroundImage = icon_hover_on;
+        document.getElementById("bttn-anim-3").style.backgroundImage = icon_360_off;
         SelectButtonOption("bttn-anim-2","txt-anim-2");
         UnselectButtonOption("bttn-anim-3","txt-anim-3");
     }else if (isHover_0){
@@ -692,8 +737,8 @@ document.getElementById("bttn-anim-2").addEventListener('click', function(){
 document.getElementById("bttn-anim-3").addEventListener('click', function(){
     if(!is360_0){
         Is3600();
-        document.getElementById("bttn-anim-3").style.backgroundImage = "url('icons/icon_360_on.png')";
-        document.getElementById("bttn-anim-2").style.backgroundImage = "url('icons/icon_hover.png')";
+        document.getElementById("bttn-anim-3").style.backgroundImage = icon_360_on;
+        document.getElementById("bttn-anim-2").style.backgroundImage = icon_hover_off;
         SelectButtonOption("bttn-anim-3","txt-anim-3");
         UnselectButtonOption("bttn-anim-2","txt-anim-2");
     }else if (is360_0){
@@ -741,8 +786,8 @@ document.getElementById("bttn-aspa-1").addEventListener('click', function(){
     if(isAspa != 0){
         SelectButtonOption("bttn-aspa-1","txt-aspa-1");
         UnselectButtonOption("bttn-aspa-2","txt-aspa-2");
-        document.getElementById("bttn-aspa-1").style.backgroundImage = "url('icons/icon_aspa1_on.png')";
-        document.getElementById("bttn-aspa-2").style.backgroundImage = "url('icons/icon_aspa2.png')";
+        document.getElementById("bttn-aspa-1").style.backgroundImage = icon_aspa1_on;
+        document.getElementById("bttn-aspa-2").style.backgroundImage = icon_aspa2_off;
 
         StartBladeChange();
         const enableBlade2IDtimeout = setTimeout(DCBlade1,4000);
@@ -756,8 +801,8 @@ document.getElementById("bttn-aspa-2").addEventListener('click', function(){
     if(isAspa != 1){
         SelectButtonOption("bttn-aspa-2","txt-aspa-2");
         UnselectButtonOption("bttn-aspa-1","txt-aspa-1");
-        document.getElementById("bttn-aspa-2").style.backgroundImage = "url('icons/icon_aspa2_on.png')";
-        document.getElementById("bttn-aspa-1").style.backgroundImage = "url('icons/icon_aspa1.png')";
+        document.getElementById("bttn-aspa-2").style.backgroundImage = icon_aspa2_on;
+        document.getElementById("bttn-aspa-1").style.backgroundImage = icon_aspa1_off;
     
         StartBladeChange();
         const enableBlade2IDtimeout = setTimeout(DCBlade2,4000);
