@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 @font-face {
-  font-family: 'Roboto';
-  src: url('../fonts/Roboto/Roboto-Regular.ttf');
+  font-family: 'Ethnocentric';
+  src: url('fonts/Ethnocentric\ Light.otf');
 }
 
   body{
@@ -94,9 +94,8 @@
 .txt-name-drone{
   height: 80px;
   background-color: transparent;
-  font-family:"Saira", sans-serif;
-  font-weight: bold;
-  font-size: 60;
+  font-family:"Ethnocentric";
+  font-size: 56;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
@@ -106,8 +105,9 @@
 .txt-name-pfx{
   height: 32px;
   background-color: transparent;
-  /*font-family:;*/
-  font-size: 20;
+  font-family:"Ethnocentric";
+  font-weight: lighter;
+  font-size: 16;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
@@ -125,37 +125,63 @@
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
+  margin-left: 96px;
   margin-right: 80px;
   margin-top: 24px;
+  letter-spacing: 1.5px;
 }
 
 
 
 
 .start-button{
-
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   position: absolute;
-  bottom: 40px;
-  width: 100%;
+  right: 200px;
+  bottom: 48px;
+
+  background-color: #1f1f1fb6;
+  border-radius: 10px 10px 10px 10px;
 }
 .bttn-start{
-  width: 232px;
-  height: 40px;
+  width: 40px;
+  height: 48px;
   white-space: break-spaces;
   font-family:"Saira", sans-serif;
   font-weight:400;
   font-size: .8rem;
   color: rgb(255, 255, 255);
-  background-color: #1f1f1fb6;
+  background-color: transparent;
   border: solid #ffffff 0px;
   border-radius: 10px 10px 10px 10px;
+  background-image:url("icons/starticon.png");
+  background-repeat:no-repeat;
+  background-size: 32px 32px;
+  background-position:center;
+  box-sizing: border-box;
+  margin-left: 32px;
+  margin-right: 0;
+}
+.bttn-start-1{
+width: 240px;
+height: 40px;
+white-space: break-spaces;
+font-family:"Saira", sans-serif;
+font-weight:400;
+font-size: .8rem;
+color: rgb(255, 255, 255);
+background-color: transparent;
+border: solid #ffffff 0px;
+border-radius: 10px 10px 10px 10px;
+background-color: none;
+margin-left: 0px;
+margin-right: 16px;
 }
 
 
-  
+
 
 
 
