@@ -231,6 +231,14 @@ by skipping the expected traffic delays.
         isConfiguration = true;
 
     });
+    document.getElementById("bttn-go-Welcome").addEventListener('click', function(){
+        isConfiguration = false;
+
+    });
+    document.getElementById("bttn-go-Comparison").addEventListener('click', function(){
+        isConfiguration = false;
+
+    });
   
     function HideAllAnotations(labelsArray, visualization){
         for(let i=0; i < labelsArray.length; i++){
@@ -250,9 +258,10 @@ by skipping the expected traffic delays.
         clickedEntity = screenTarget.entity;
                         
      
+        if(isConfiguration){
 
              // mostrar una anotacion si se clickea una entidad especifica 
-            if(clickedEntity.getEUID() ==  id_r_door_paint || clickedEntity.getEUID() == id_r_door_paint || clickedEntity.getEUID() == id_hull){
+             if(clickedEntity.getEUID() ==  id_r_door_paint || clickedEntity.getEUID() == id_r_door_paint || clickedEntity.getEUID() == id_hull){
                 if(!isbody){
                     UnselectBlade1();
                     UnselectBlade2();
@@ -301,6 +310,9 @@ by skipping the expected traffic delays.
                 }
             }  
         
+        }
+
+            
            
         
     }
