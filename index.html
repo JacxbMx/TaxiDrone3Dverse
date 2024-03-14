@@ -225,6 +225,7 @@ by skipping the expected traffic delays.
         HideAllAnotations(labelsArray, "none");
         isConfiguration = true;
 
+<<<<<<< HEAD
     });
     document.getElementById("bttn-start-1").addEventListener('click', function(){
         HideAllAnotations(labelsArray, "none");
@@ -239,6 +240,14 @@ by skipping the expected traffic delays.
         isConfiguration = false;
 
     });
+=======
+    });
+    document.getElementById("bttn-start-1").addEventListener('click', function(){
+        HideAllAnotations(labelsArray, "none");
+        isConfiguration = true;
+
+    });
+>>>>>>> 555230e92921fc8531d43bce85d45695b9ed003f
   
     function HideAllAnotations(labelsArray, visualization){
         for(let i=0; i < labelsArray.length; i++){
@@ -258,10 +267,16 @@ by skipping the expected traffic delays.
         clickedEntity = screenTarget.entity;
                         
      
+<<<<<<< HEAD
         if(isConfiguration){
 
              // mostrar una anotacion si se clickea una entidad especifica 
              if(clickedEntity.getEUID() ==  id_r_door_paint || clickedEntity.getEUID() == id_r_door_paint || clickedEntity.getEUID() == id_hull){
+=======
+
+             // mostrar una anotacion si se clickea una entidad especifica 
+            if(clickedEntity.getEUID() ==  id_r_door_paint || clickedEntity.getEUID() == id_r_door_paint || clickedEntity.getEUID() == id_hull){
+>>>>>>> 555230e92921fc8531d43bce85d45695b9ed003f
                 if(!isbody){
                     UnselectBlade1();
                     UnselectBlade2();
@@ -310,9 +325,12 @@ by skipping the expected traffic delays.
                 }
             }  
         
+<<<<<<< HEAD
         }
 
             
+=======
+>>>>>>> 555230e92921fc8531d43bce85d45695b9ed003f
            
         
     }
