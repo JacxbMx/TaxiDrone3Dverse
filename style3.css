@@ -3,6 +3,10 @@
   font-family: 'Ethnocentric';
   src: url('fonts/Ethnocentric\ Light.otf');
 }
+@font-face {
+  font-family: 'DroidSansMono';
+  src: url('fonts/DroidSansMono.ttf');
+}
 
   body{
     background-color: #070707;
@@ -105,8 +109,7 @@
 .txt-name-pfx{
   height: 32px;
   background-color: transparent;
-  font-family:"Ethnocentric";
-  font-weight: lighter;
+  font-family:"DroidSansMono";
   font-size: 16;
   color: rgb(255, 255, 255);
   background-color: transparent;
