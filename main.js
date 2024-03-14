@@ -473,7 +473,7 @@ function VisbilityWelcomeWindow(visbility){
 function VisibilityConfigurationWindow(visbility){
     document.getElementById("config-window").style.display = visbility;
     document.getElementById("config-set-lights").style.display = visbility;
-    document.getElementById("config-set-labels").style.display = visbility;
+    document.getElementById("config-set-labels-1").style.display = "none";
 
 }
 
@@ -975,4 +975,8 @@ function UnselectButtonOption(button, text){
     document.getElementById(button).style.borderColor = whiteColor;
     document.getElementById(text).style.color = whiteColor;
 }
+
+
+
+
 
