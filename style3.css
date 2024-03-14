@@ -488,20 +488,19 @@ margin-right: 16px;
 }
 
 .config-set-labels{
+
+  background-color: #1f1f1fd5;
+  border: solid #ffffff 0px;
+  border-radius: 10px 10px 10px 10px;
   position: absolute;
-  width: 240px;
-  height: 240px;
-  right: 120px;
-  background-color: #1f1f1fb6;
-  border: solid #ffffff 1px;
-  border-radius: 240px 240px 240px 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 320px;
+  height: 160px;
+  left: 48px;
+  bottom: 48px;
 }
 .txt-label{
-  width: 200px;
-  height: 200px;
+  width: 272px;
+  height: 160px;
   font-size: 12;
   white-space: break-spaces;
   font-family:"Saira", sans-serif;
@@ -509,6 +508,12 @@ margin-right: 16px;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
+  text-align: justify;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 24px;
+  margin-right: 24px;
 }
 
 
@@ -518,27 +523,26 @@ margin-right: 16px;
 
 .comparative-original{
   position: absolute;
-    bottom: 48px;
-    left: 400px;
+  bottom: 24px;
+  left: 600px;
 }
 .comparative-custom{
   position: absolute;
-    bottom: 48px;
-    right: 400px;
-    
+  bottom: 24px;
+  right: 600px;
 }
+
 
 .bttn-comparative{
   width: 240px;
   height: 40px;
-  white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+    font-weight:400;
   font-size: .7rem;
   color: rgb(255, 255, 255);
-  background-color: transparent;
-  border: solid #ffffff 1px;
-  border-radius: 100px 100px 100px 100px;
-  background-color: none;
+  background-color: #1f1f1fb6;
+  border: solid #ffffff 0px;
+  border-radius: 10px 10px 10px 10px;
 }
 
 
@@ -546,10 +550,10 @@ margin-right: 16px;
   position: absolute;
   width: 160px;
   height: 240px;
-  left: 48px;
-  top: 48px;
+  left: 0;
+  top: 0;
   background-color: #1f1f1fb6;
-  border: solid #ffffff 1px;
+  border: solid #ffffff 0px;
   border-radius: 10px 10px 10px 10px;
   display: flex;
   align-items: center;
@@ -560,20 +564,22 @@ margin-right: 16px;
   height: 200px;
   font-size: 12;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
+  text-align: start;
 }
 
 .custom-info{
   position: absolute;
   width: 160px;
   height: 240px;
-  right: 48px;
-  top: 48px;
+  right: 0;
+  top: 0;
   background-color: #1f1f1fb6;
-  border: solid #ffffff 1px;
+  border: solid #ffffff 0px;
   border-radius: 10px 10px 10px 10px;
   display: flex;
   align-items: center;
@@ -584,8 +590,11 @@ margin-right: 16px;
   height: 200px;
   font-size: 12;
   white-space: break-spaces;
-  /*font-family:;*/
+  font-family:"Saira", sans-serif;
+  font-weight:400;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: solid #ffffff 0px;
+  text-align: start;
+
 }
