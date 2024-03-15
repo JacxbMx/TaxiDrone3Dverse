@@ -491,113 +491,113 @@ margin-right: 16px;
 }
 
 .config-set-labels{
-
-  background-color: #1f1f1fd5;
-  border: solid #ffffff 0px;
-  border-radius: 10px 10px 10px 10px;
   position: absolute;
-  width: 320px;
-  height: 160px;
-  left: 48px;
+  left: 0px;
   bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  background-color: #1f1f1fb6;
+
+ 
 }
-.txt-label{
-  width: 272px;
-  height: 160px;
+.txt-label-info-title{
+  height: 28px;
+  width: 320px;
   font-size: 12;
-  white-space: break-spaces;
   font-family:"Saira", sans-serif;
-  font-weight:400;
+  font-weight:600;
+  color: #E3FE75;
+  background-color: transparent;
+  border: solid #ffffffb6 0px;
+  text-align: end;
+  margin-left: 24px;
+  margin-top: 24px;
+  margin-right: 24px;
+
+}
+.txt-label-info{
+  width: 320px;
+  height: 104px;
+  font-size: 12;
+  font-family:"Saira", sans-serif;
+  font-weight:500;
   color: rgb(255, 255, 255);
   background-color: transparent;
-  border: solid #ffffff 0px;
-  text-align: justify;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: solid #ffffffb6 0px;
+  letter-spacing: 1px;
+  white-space: normal;
+  text-align: start;
   margin-left: 24px;
+  margin-bottom: 24px;
   margin-right: 24px;
+
 }
 
 
 
 
-
-
-.comparative-original{
-  position: absolute;
-  bottom: 24px;
-  left: 600px;
-}
-.comparative-custom{
-  position: absolute;
-  bottom: 24px;
-  right: 600px;
-}
-
-
-.bttn-comparative{
-  width: 240px;
-  height: 40px;
-  font-family:"Saira", sans-serif;
-    font-weight:400;
-  font-size: .7rem;
-  color: rgb(255, 255, 255);
-  background-color: #1f1f1fb6;
-  border: solid #ffffff 0px;
-  border-radius: 10px 10px 10px 10px;
-}
 
 
 .original-info{
   position: absolute;
-  width: 160px;
-  height: 240px;
   left: 0;
-  top: 0;
-  background-color: #1f1f1fb6;
+  bottom: 48;
   border: solid #ffffff 0px;
-  border-radius: 10px 10px 10px 10px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  
+}
+.txt-original-info-title{
+  width: 240px;
+  height: 28px;
+  font-size: 12;
+  font-family:"Saira", sans-serif;
+  font-weight:600;
+  color: rgb(0, 0, 0);
+  background-color: #E3FE75;
+  border: solid #000000 0px;
+  text-align: end;
 }
 .txt-original-info{
-  width: 160px;
-  height: 200px;
+  width: 240x;
+  height: 28px;
   font-size: 12;
-  white-space: break-spaces;
   font-family:"Saira", sans-serif;
-  font-weight:400;
+  font-weight:500;
   color: rgb(255, 255, 255);
-  background-color: transparent;
+  background-color: #1f1f1fb6;
   border: solid #ffffff 0px;
-  text-align: start;
+  text-align: end;
 }
 
 .custom-info{
   position: absolute;
-  width: 160px;
-  height: 240px;
   right: 0;
-  top: 0;
-  background-color: #1f1f1fb6;
+  bottom: 48;
   border: solid #ffffff 0px;
-  border-radius: 10px 10px 10px 10px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  
+}
+.txt-custom-info-title{
+  width: 240px;
+  height: 28px;
+  font-size: 12;
+  font-family:"Saira", sans-serif;
+  font-weight:600;
+  color: rgb(0, 0, 0);
+  background-color: #E3FE75;
+  border: solid #000000 0px;
+  text-align: start;
 }
 .txt-custom-info{
-  width: 160x;
-  height: 200px;
+  width: 240px;
+  height: 28px;
   font-size: 12;
-  white-space: break-spaces;
   font-family:"Saira", sans-serif;
-  font-weight:400;
+  font-weight:500;
   color: rgb(255, 255, 255);
-  background-color: transparent;
+  background-color: #1f1f1fb6;
   border: solid #ffffff 0px;
   text-align: start;
-
 }

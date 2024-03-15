@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8"/>
         <meta  content="width=device-width,initial-scale=1.0" name="viewport"/>
-        <link rel="stylesheet" href="style3.css" />
+        <link rel="stylesheet" href="style4.css" />
         
 
     </head>
@@ -130,36 +130,26 @@ by skipping the expected traffic delays.
 
         <div class="config-set-labels" id="config-set-labels-1">
                 <div>
-                    <button class="txt-label" role="button" id="txt-label-hull">The hull of the Drone X7926R is one of the greatest innovations in our times. The combination of kevlar and carbon fiber gives the hull unprecedented resistance and lightness.</button>
-                    <button class="txt-label" role="button" id="txt-label-blade1">The Rotor Blade Model SK1028 offers the Drone faster and more agile mobility thanks to its 7-part blades. In addition, the angles of its design provides a great sporty style honoring its speed improvement.</button>
-                    <button class="txt-label" role="button" id="txt-label-blade2">The Rotor Blade Model SQ302 has a lighter design, which gives the drone an elegant mood. Following this line, the 3-part propellers offers noise cancellation that improves the user experience.</button>
+                    <button class="txt-label-info-title" role="button" id="txt-label-title">Base Configuration</button>    
+                    <button class="txt-label-info" role="button" id="txt-label">The hull of the Drone X7926R is one of the greatest innovations in our times. The combination of kevlar and carbon fiber gives the hull unprecedented resistance and lightness.</button>
                 </div>
         </div>
 
         
         <!-- Comparative UI -->
         <div class="comparative-window" id="comparative-window">
-            <div class="comparative-names">
-                <div class="comparative-original">
-                    <button class="bttn-comparative" role="button" id="bttn-comparative-1">Base Drone</button>
-                </div>
-        
-                <div class="comparative-custom">
-                    <button class="bttn-comparative" role="button" id="bttn-comparative-2">Custom Drone</button>
-                </div>
-            </div>
            
             <div class="original-info">
-                <button class="txt-original-info" role="button" id="txt-info-original">Specs orginal drone
-                    Aspa
-                    paint
-                </button>
+                <button class="txt-original-info-title" role="button" id="txt-info-original">Base Configuration</button>
+                <button class="txt-original-info" role="button" id="txt-info-original-model">Model: X7926R</button>
+                <button class="txt-original-info" role="button" id="txt-info-original-blade">Blades: SK102</button>
+                <button class="txt-original-info" role="button" id="txt-info-original-paint">Paint Vermillon</button>
             </div>
             <div class="custom-info">
-                <button class="txt-custom-info" role="button" id="txt-info-custom">Specs custom drone
-                    Aspa
-                    paint
-                </button>
+                <button class="txt-custom-info-title" role="button" id="txt-info-custom">Your Configuration</button>
+                <button class="txt-custom-info" role="button" id="txt-info-custom-model">Model: X7926R</button>
+                <button class="txt-custom-info" role="button" id="txt-info-custom-blade">Blades: SK102</button>
+                <button class="txt-custom-info" role="button" id="txt-info-custom-paint">Paint Vermillon</button>
             </div>
             
         </div>
@@ -177,9 +167,11 @@ by skipping the expected traffic delays.
    
 </body>
  <!-- APP ENTRYPOINT -->
- <script src="main.js" type="module"></script>
+ <script src="main2.js" type="module"></script>
 
  <script>
+
+////START INTERACTION SHOW ANOTATIONS WHE SELECT HULL OR BLADES //////
      //HULL ENTITIES UUIDS
         var id_body = '91deaae6-db56-4c86-9149-40573e09523b';
         var id_hull = 'bdc0e85d-06dc-4f35-9da7-5f18b05b416b';
@@ -190,7 +182,7 @@ by skipping the expected traffic delays.
         var id_blade1_bl ='1a036cf6-c28b-41bc-b5e8-031fa72e5b8d';
         var id_blade2_br ='067e428a-e0c5-4f3f-92e4-8ad26fb24ca1';
 
-        var labelsArray = ['txt-label-hull','txt-label-blade1','txt-label-blade2'];
+        var labelsArray = ['txt-label-title','txt-label'];
 
         var id_aspa1_fl = '547aceab-c09f-4d57-8aec-cd3d1c717f60';
         var id_aspa1_fr ='ca447d6d-2f95-4a4a-8074-193f1d5bf3ee';
@@ -218,16 +210,16 @@ by skipping the expected traffic delays.
     
     //Flow  control of configurator windows
     document.getElementById("bttn-go-Config").addEventListener('click', function(){
-        HideAllAnotations(labelsArray, "none");
+        SetVisibilityAnotations("none");
         isConfiguration = true;
     });
     document.getElementById("bttn-start").addEventListener('click', function(){
-        HideAllAnotations(labelsArray, "none");
+        SetVisibilityAnotations("none");
         isConfiguration = true;
 
     });
     document.getElementById("bttn-start-1").addEventListener('click', function(){
-        HideAllAnotations(labelsArray, "none");
+        SetVisibilityAnotations("none");
         isConfiguration = true;
 
     });
@@ -241,12 +233,16 @@ by skipping the expected traffic delays.
     });
     
   
-    function HideAllAnotations(labelsArray, visualization){
-        for(let i=0; i < labelsArray.length; i++){
-            document.getElementById(labelsArray[i]).style.display = visualization;
-        }
-    }
+    function SetVisibilityAnotations(visualization){
 
+        document.getElementById('txt-label-title').style.display = visualization;
+        document.getElementById('txt-label').style.display = visualization;
+        document.getElementById("config-set-labels-1").style.display = visualization;
+    }
+    function SetTextAnotation(title, text){
+        document.getElementById('txt-label-title').innerHTML = title;
+        document.getElementById('txt-label').innerHTML = text;
+    }
     var clickedEntity = 0;;
 
     var lastEntity;
@@ -319,9 +315,8 @@ by skipping the expected traffic delays.
 
     async function SelectHull(){
         //Show Annotation
-        HideAllAnotations(labelsArray, "none");
-        document.getElementById(labelsArray[0]).style.display = "flex";
-        document.getElementById("config-set-labels-1").style.display = "inline";
+        SetVisibilityAnotations("flex");
+        SetTextAnotation('X7926R : HULL', 'The hull of the Drone X7926R is one of the greatest innovations in our times. The combination of kevlar and carbon fiber gives the hull unprecedented resistance and lightness.');
 
         var temphull = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_body);
         body = temphull[0];
@@ -331,9 +326,7 @@ by skipping the expected traffic delays.
     }
  
     async function UnselectHull(){
-        HideAllAnotations(labelsArray, "none");
-        document.getElementById("config-set-labels-1").style.display = "none";
-
+        SetVisibilityAnotations("none");
 
         var temphull = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_body);
         body = temphull[0];
@@ -346,9 +339,9 @@ by skipping the expected traffic delays.
     
     async function SelectBlade1(){
         //Show Annotation
-        HideAllAnotations(labelsArray, "none");
-        document.getElementById(labelsArray[1]).style.display = "flex";
-        document.getElementById("config-set-labels-1").style.display = "inline";
+        SetVisibilityAnotations("flex");
+        SetTextAnotation('ROTOR BLADES : SK1028', 'The Rotor Blade Model SK1028 offers the Drone faster and more agile mobility thanks to its 7-part blades. In addition, the angles of its design provides a great sporty style honoring its speed improvement.');
+    
 
         var tempblade1 = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_blade1);
         blade1 = tempblade1[0];
@@ -359,8 +352,7 @@ by skipping the expected traffic delays.
     }
  
     async function UnselectBlade1(){
-        HideAllAnotations(labelsArray, "none");
-        document.getElementById("config-set-labels-1").style.display = "none";
+        SetVisibilityAnotations("none");
 
         var tempblade1 = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_blade1);
         blade1 = tempblade1[0];
@@ -371,9 +363,10 @@ by skipping the expected traffic delays.
     } 
     async function SelectBlade2(){
         //Show Annotation
-        HideAllAnotations(labelsArray, "none");
-        document.getElementById(labelsArray[2]).style.display = "flex";
-        document.getElementById("config-set-labels-1").style.display = "inline";
+        SetVisibilityAnotations("flex");
+        SetTextAnotation('ROTOR BLADES : SQ302', 'The Rotor Blade Model SQ302 has a lighter design, which gives the drone an elegant mood. Following this line, the 3-part propellers offers noise cancellation that improves the user experience.');
+
+        
 
         var tempblade2 = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_blade1);
         blade2 = tempblade2[0];
@@ -384,8 +377,7 @@ by skipping the expected traffic delays.
     }
  
     async function UnselectBlade2(){
-        HideAllAnotations(labelsArray, "none");
-        document.getElementById("config-set-labels-1").style.display = "none";
+        SetVisibilityAnotations("none");
 
         var tempblade2 = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_blade1);
         blade2 = tempblade2[0];
@@ -395,10 +387,10 @@ by skipping the expected traffic delays.
         console.log('unselect blade 1');
     } 
 
-
+    
   
    
-
+//// END INTERACTION SHOW ANOTATIONS WHE SELECT HULL OR BLADES //////
     
 
     

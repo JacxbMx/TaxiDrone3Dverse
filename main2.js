@@ -9,6 +9,9 @@ window.addEventListener("load", initApp);
     var droneConfigurable = 0;
     var droneOriginal = 0;
 
+    //HANGAR ENTITY
+    var hangar = 0;
+
     //BLADE 1 ENTITIES ARRAYS
     var dc_aspa1_fl = [];var do_aspa1_fl = [];var dc_aspa1_fr = [];var do_aspa1_fr = [];var dc_aspa1_bl = [];var do_aspa1_bl = [];var dc_aspa1_br = [];var do_aspa1_br = [];
 
@@ -55,6 +58,9 @@ window.addEventListener("load", initApp);
     //DRONES ENTITIES UUID
     var id_droneConfigurable = '19119c4c-bea5-4ffb-81a0-c98b6e6533fa';
     var id_droneOriginal = '22cfb5af-ebc8-4cff-9259-9e06f3062d70';
+
+    //HANGAR ENTITU UUID
+    var id_hangar = '5e26dbe2-eb6d-45de-8520-21451bec23ec';
 
     //BLADE 1 ENTITIES UUID ARRAYS
     var ids_aspa1_fl = ['f9e700e7-2277-4da9-a4c4-d68ca809bfc9','b2fc8449-3092-4082-8ea3-6a8dd5d2a8fa','0d10f6a2-538c-4198-9e59-05fc8a061957',
@@ -233,7 +239,8 @@ function DefaultConfig(){
     PaintIsVermillon();
     ToggleLights(lights_off, a_lights_off_mat, dc_a_lights_ref, false);
     InitDroneVisualization();
-    IdleDroneOriginal();
+    StopDOAnim();
+    StartDOHover();
     StopDCAnim();
     DOBlade1();
     
@@ -251,6 +258,9 @@ function DefaultConfig(){
         droneConfigurable = tempdroneConfigurable[0];
         var tempdroneOriginal = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_droneOriginal);
         droneOriginal = tempdroneOriginal[0];
+
+        var tempHangar = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_hangar);
+        hangar = tempHangar[0];
     }
 
     async function GetCameras(){
@@ -397,6 +407,8 @@ function WelcomeWindow(){
     VisibilityConfigurationWindow("none");
     VisibilityComparisonWindow("none");
     InitDroneVisualization();
+    StopDOAnim();
+    StartDOHover();
     
     //camera
         SetCamera(cameraWelcome);
@@ -413,6 +425,8 @@ function WelcomeWindow(){
         document.getElementById("bttn-go-Welcome").style.pointerEvents = "none";
         document.getElementById("bttn-go-Config").style.pointerEvents = "auto";
         document.getElementById("bttn-go-Comparison").style.pointerEvents = "auto";
+
+
 }
 function ConfigWindow(){
     VisbilityWelcomeWindow("none");
@@ -420,6 +434,7 @@ function ConfigWindow(){
     VisibilityComparisonWindow("none");
     ConfigDroneVisualization();
     StopDCAnim();
+    StopDOAnim();
 
     //camera
         SetCamera(cameraConfig);
@@ -446,13 +461,16 @@ function ComparativeWindow(){
     VisibilityComparisonWindow("flex");
     ComparativeDroneVisualization();
 
-    StartDCHover();
-
+    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : true, noHover : true, noChange : false}});
+    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : true, noHover : true, noChange : false}});
+    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : true, noChange : false}});
+    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : true, noChange : false}});
     //camera
         SetCamera(cameraComparative);
 
     //Manage options
         DroneCustomWhichBladeIs();
+        DOBlade1();
 
     //UpdateButtos
         document.getElementById("bttn-go-Welcome").style.color = whitheFont;
@@ -462,6 +480,9 @@ function ComparativeWindow(){
         document.getElementById("bttn-go-Welcome").style.pointerEvents = "auto";
         document.getElementById("bttn-go-Config").style.pointerEvents = "auto";
         document.getElementById("bttn-go-Comparison").style.pointerEvents = "none";
+
+       
+
 }
 
 //Methods to Manage visbility of UI
@@ -658,6 +679,8 @@ function PaintIsVermillon(){
     isCobalt = false;
     isNavy = false;
     isBlack = false;
+
+    document.getElementById("txt-info-custom-paint").innerHTML = 'Paint: Vermillon';
 }
 function PaintIsCobalt(){
     PaintIs(paint_cobalt);
@@ -671,6 +694,8 @@ function PaintIsCobalt(){
     isCobalt = true;
     isNavy = false;
     isBlack = false;
+
+    document.getElementById("txt-info-custom-paint").innerHTML = 'Paint: Cobalt';
 }
 function PaintIsNavy(){
     PaintIs(paint_navy);
@@ -684,6 +709,9 @@ function PaintIsNavy(){
     isCobalt = false;
     isNavy = true;
     isBlack = false;
+
+    document.getElementById("txt-info-custom-paint").innerHTML = 'Paint: Bussiness Navy';
+
 }
 function PaintIsBlack(){
     PaintIs(paint_black);
@@ -697,6 +725,8 @@ function PaintIsBlack(){
     isCobalt = false;
     isNavy = false;
     isBlack = true;
+
+    document.getElementById("txt-info-custom-paint").innerHTML = 'Paint: Black Pearl';
 }
 
 //Config Lights Drone
@@ -729,7 +759,7 @@ function ToggleLights(fLightsMat, aLightsMat, arrayBlade1Lights, statusLight,col
 }
 
 
-//Methos to manage drone visualization
+//Methods to manage drone visualization
 function InitDroneVisualization(){
     
     droneOriginal.setGlobalTransform({position : [0,0,0]});
@@ -738,6 +768,7 @@ function InitDroneVisualization(){
 
     droneOriginal.setVisibility(true);
     droneConfigurable.setVisibility(false);
+    hangar.setVisibility(false);
 }
 
 function ConfigDroneVisualization(){
@@ -747,6 +778,7 @@ function ConfigDroneVisualization(){
 
     droneOriginal.setVisibility(false);
     droneConfigurable.setVisibility(true);
+    hangar.setVisibility(true);
 }
 
 function ComparativeDroneVisualization(){
@@ -754,8 +786,11 @@ function ComparativeDroneVisualization(){
     droneOriginal.setGlobalTransform({position : [-2.5,0,0]});
     droneConfigurable.setGlobalTransform({position : [2.5,0,0]});
 
+
     droneOriginal.setVisibility(true);
     droneConfigurable.setVisibility(true);
+    hangar.setVisibility(true);
+
 }
 
 
@@ -803,8 +838,15 @@ document.getElementById("bttn-anim-3").addEventListener('click', function(){
     
 });
 //Methods to anim
-function IdleDroneOriginal(){
-    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : true, isChange : false, no360 : false, noHover : false, noChange : false}});
+function StartDOHover(){
+    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : true, isChange : false, no360 : true, noHover : false, noChange : false}});
+
+}
+function StopDOAnim(){
+    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : true, noHover : true, noChange : true}});
+}
+function StartDO360(){
+    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : false, noChange : false}});
 }
 
 function StopDCAnim(){
@@ -851,7 +893,7 @@ function StartDCHover(){
 }
 
 function StartDC360(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noIdle : false, noChange : false}});
+    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : false, noChange : false}});
     //Disable other options
     document.getElementById("bttn-anim-2").style.pointerEvents = "none";
     document.getElementById("bttn-anim-3").style.pointerEvents = "auto";
@@ -882,6 +924,8 @@ document.getElementById("bttn-aspa-1").addEventListener('click', function(){
     }else{
         return;
     }
+
+    document.getElementById("txt-info-custom-blade").innerHTML = 'Blades: SK1028';
 });
 document.getElementById("bttn-aspa-2").addEventListener('click', function(){
     if(drone_c_isBlade != 2){
@@ -899,6 +943,7 @@ document.getElementById("bttn-aspa-2").addEventListener('click', function(){
         return;
     }
     
+    document.getElementById("txt-info-custom-blade").innerHTML = 'Blades: SQ302';
 });
 
 
