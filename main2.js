@@ -507,23 +507,29 @@ document.getElementById("bttn-set-blade").addEventListener('click', function(){
 
     if(!isConfigureBlades){
         IsConfigureBlades();
+        VisibilitySetLights("none");
     }else if (isConfigureBlades){
         isNothingConfigurable();
+        VisibilitySetLights("inline");
     }
 });
 document.getElementById("bttn-set-mats").addEventListener('click', function(){
 
     if(!isConfigureMats){
         IsConfigureMats();
+        VisibilitySetLights("none");
     }else if (isConfigureMats){
         isNothingConfigurable();
+        VisibilitySetLights("inline");
     }
 });
 document.getElementById("bttn-set-anim").addEventListener('click', function(){
     if(!isConfigureAnims){
         IsConfigureAnim();
+        VisibilitySetLights("none");
     }else if(isConfigureAnims){
         isNothingConfigurable();
+        VisibilitySetLights("inline");
     }
 });
 
@@ -553,6 +559,7 @@ function VisibilitySetAnims(visbility){
 }
 function VisibilitySetLights(visbility){
     document.getElementById("bttn-anim-1").style.display = visbility;
+    document.getElementById("txt-anim-1").style.display = visbility;
 }
 
 function IsConfigureBlades(){
