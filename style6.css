@@ -105,6 +105,7 @@
   border: solid #ffffff 0px;
   margin-left: 48px;
   margin-top: 8px;
+  text-align: start;
 }
 .txt-name-pfx{
   height: 32px;
@@ -115,6 +116,7 @@
   background-color: transparent;
   border: solid #ffffff 0px;
   margin-left: 48px;
+  text-align: start;
 }
 .txt-info-drone{
   height: 120px;
@@ -1069,11 +1071,9 @@ margin-right: 16px;
   .txt-name-drone{
     height: 48px;
     font-size: 18;
-    margin-top: 14px;
+    margin-top: 0px;
     margin-left: 10px;
     color: rgb(0, 255, 106);
-
-
   }
   .txt-name-pfx{
     height: 10px;
@@ -1087,7 +1087,7 @@ margin-right: 16px;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 8px;
-    border: solid #ffffff 0px;
+    border: solid #ffffff 2px;
     text-align: justify;
     letter-spacing: 0px;
 
