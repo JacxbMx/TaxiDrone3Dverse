@@ -97,6 +97,7 @@
  }
 .txt-name-drone{
   height: 80px;
+  width: auto;
   background-color: transparent;
   font-family:"Ethnocentric";
   font-size: 56;
