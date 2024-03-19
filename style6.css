@@ -65,7 +65,7 @@
 
   .canvas-container{
     width: 100vw;
-    height: fit-content;
+    height: 94%;
     align-items: center;
     display: flex;
     justify-content: center;
