@@ -1073,7 +1073,8 @@ margin-right: 16px;
     margin-top: 16px;
     margin-left: 10px;
     color: rgb(255, 255, 255);
-    border: solid #da06b6 2px;
+    border: solid #0669da 2px;
+    text-align: start;
   
   }
   .txt-name-pfx{
