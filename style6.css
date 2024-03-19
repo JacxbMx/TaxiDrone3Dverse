@@ -65,12 +65,11 @@
 
   .canvas-container{
     width: 100vw;
-    height: 94%;
+    height: fit-content;
     align-items: center;
     display: flex;
     justify-content: center;
     position: relative;
-    
     box-sizing: border-box;
   }
 
