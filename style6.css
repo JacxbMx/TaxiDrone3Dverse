@@ -1067,8 +1067,8 @@ margin-right: 16px;
     margin-right: 16px;
   }
   .txt-name-drone{
-    height: 40px;
-    font-size: 24;
+    height: 48px;
+    font-size: 20;
     margin-top: 0px;
     margin-left: 10px;
     color: rgb(0, 255, 106);
@@ -1083,7 +1083,7 @@ margin-right: 16px;
   }
   .txt-info-drone{
     height: 140px;
-    font-size: 8.5;
+    font-size: 8;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 8px;
@@ -1105,7 +1105,7 @@ margin-right: 16px;
   .bttn-start-1{
     width: 140px;
     height: 32px;
-    font-size: .5rem;
+    font-size: .4rem;
     margin-right: 16px;
   }
 
