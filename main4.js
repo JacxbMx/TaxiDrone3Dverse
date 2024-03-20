@@ -9,9 +9,7 @@ window.addEventListener("load", initApp);
     var droneConfigurable = 0;
     var droneOriginal = 0;
 
-    //HANGAR ENTITY
-    var hangar = 0;
-
+  
     //BLADE 1 ENTITIES ARRAYS
     var dc_aspa1_fl = [];var do_aspa1_fl = [];var dc_aspa1_fr = [];var do_aspa1_fr = [];var dc_aspa1_bl = [];var do_aspa1_bl = [];var dc_aspa1_br = [];var do_aspa1_br = [];
 
@@ -260,7 +258,6 @@ function DefaultConfig(){
         droneOriginal = tempdroneOriginal[0];
 
         var tempHangar = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_hangar);
-        hangar = tempHangar[0];
     }
 
     async function GetCameras(){
@@ -775,7 +772,6 @@ function InitDroneVisualization(){
 
     droneOriginal.setVisibility(true);
     droneConfigurable.setVisibility(false);
-    hangar.setVisibility(false);
 }
 
 function ConfigDroneVisualization(){
@@ -785,7 +781,6 @@ function ConfigDroneVisualization(){
 
     droneOriginal.setVisibility(false);
     droneConfigurable.setVisibility(true);
-    hangar.setVisibility(true);
 }
 
 function ComparativeDroneVisualization(){
@@ -796,7 +791,6 @@ function ComparativeDroneVisualization(){
 
     droneOriginal.setVisibility(true);
     droneConfigurable.setVisibility(true);
-    hangar.setVisibility(true);
 
 }
 
