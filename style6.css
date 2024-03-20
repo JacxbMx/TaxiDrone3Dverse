@@ -1070,11 +1070,11 @@ margin-right: 16px;
     height: 40px;
     font-size: 18;
     margin-top: 16px;
-    margin-left: 10px;
+    margin-left: 0px;
     color: rgb(255, 255, 255);
     border: solid #0669da 1px;
-    text-align: end;
-    width: 120px;
+    text-align: start;
+    width: 114px;
   
   }
   .txt-name-pfx{
