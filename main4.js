@@ -178,7 +178,7 @@ async function initApp() {
         sceneUUID: id_sceneUUID,
         canvas: document.getElementById("display-canvas"),
         viewportProperties: {
-            defaultControllerType: SDK3DVerse.controller_type.none,
+            defaultControllerType: SDK3DVerse.controller_type.orbit,
         },
         
         
@@ -451,6 +451,8 @@ function ConfigWindow(){
         document.getElementById("bttn-go-Welcome").style.pointerEvents = "auto";
         document.getElementById("bttn-go-Config").style.pointerEvents = "none";
         document.getElementById("bttn-go-Comparison").style.pointerEvents = "auto";
+    //Enable lights
+        VisibilitySetLights("inline");
 }
 function ComparativeWindow(){
     VisbilityWelcomeWindow("none");
@@ -492,6 +494,7 @@ function VisibilityConfigurationWindow(visbility){
     document.getElementById("config-window").style.display = visbility;
     document.getElementById("config-set-lights").style.display = visbility;
     document.getElementById("config-set-labels-1").style.display = "none";
+    
 
 }
 
