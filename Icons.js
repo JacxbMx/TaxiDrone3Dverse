@@ -1,0 +1,10 @@
+    export var icon_hover_on = "url('icons/icon_hover_on.png')";
+    export var icon_hover_off = "url('icons/icon_hover.png')" ;
+    export var icon_360_on = "url('icons/icon_360_on.png')";
+    export var icon_360_off = "url('icons/icon_360.png')";
+    export var icon_aspa1_on = "url('icons/icon_aspa1_on.png')";
+    export var icon_aspa1_off = "url('icons/icon_aspa1.png')";
+    export var icon_aspa2_on = "url('icons/icon_aspa2_on.png')";
+    export var icon_aspa2_off = "url('icons/icon_aspa2.png')";
+    export var icon_light_on = "url('icons/l1.png')";
+    export var icon_light_off = "url('icons/l2.png')" ;
