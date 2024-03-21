@@ -1,18 +1,17 @@
 window.addEventListener("load", initApp);
 
-
 import {id_publicToken, id_sceneUUID} from './template.js';
-
 import {GetCameras} from './Cameras.js';
-import {GetAllBlades, DOBlade1, DOBlade2, DCBlade1, DCBlade2 } from './Blades.js';
+import {GetAllBlades, DOBlade1, DCBlade1, DCBlade2 } from './Blades.js';
 import {icon_360_off, icon_360_on, icon_aspa1_off, icon_aspa1_on, icon_aspa2_off, icon_aspa2_on, icon_hover_off, icon_hover_on} from './Icons.js';
-import {whitheFont, greenColor, whiteColor, blackColor, blackFont} from './Colors.js';
+import {whitheFont, greenColor} from './Colors.js';
 import {SetMaterialsReferences, PaintIsVermillon, PaintIsCobalt, PaintIsNavy, PaintIsBlack} from './PaintDrone.js';
 import {GetLightEntities, LightsOff, LightsOn, isLight} from './LightsDrone.js';
 import { SelectButtonOption, UnselectButtonOption } from "./Buttons.js";
 import { IntitUI, ConfigWindow, WelcomeWindow, ComparativeWindow, IsConfigureBlades, IsConfigureMats, IsConfigureAnim, VisibilitySetLights, isConfigureBlades, isConfigureMats,isConfigureAnims, isNothingConfigurable} from './UI.js';
 import { StartDC360, StartDCHover, StartDOHover, StopDCAnim, StopDOAnim, InitDroneVisualization } from './Animations.js';
 import { StartBladeChange, StopBladeChange } from './BladeChange.js';
+//import { setupCameraController } from './CameraController.js';
 
   
     //Blades Change
@@ -58,11 +57,11 @@ async function initApp() {
         sceneUUID: id_sceneUUID,
         canvas: document.getElementById("display-canvas"),
         viewportProperties: {
-            defaultControllerType: SDK3DVerse.controller_type.orbit,
+            defaultControllerType: SDK3DVerse.controller_type.none,
         },
-        
-        
     });
+
+    //setupCameraController(document.getElementById("display-canvas"));
 
     GetAllBlades();
       
@@ -116,7 +115,6 @@ function DefaultConfig(){
     StartDOHover();
     StopDCAnim();
     DOBlade1();
-    
 }
 
 
@@ -200,6 +198,7 @@ document.getElementById("bttn-anim-1").addEventListener('click', function(){
         LightsOn();
     }
 });
+
 
 //Buttons Movement options
 document.getElementById("bttn-anim-2").addEventListener('click', function(){
