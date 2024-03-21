@@ -12,19 +12,16 @@ import {GetLightEntities, LightsOff, LightsOn, isLight} from './LightsDrone.js';
 import { SelectButtonOption, UnselectButtonOption } from "./Buttons.js";
 import { IntitUI, ConfigWindow, WelcomeWindow, ComparativeWindow, IsConfigureBlades, IsConfigureMats, IsConfigureAnim, VisibilitySetLights, isConfigureBlades, isConfigureMats,isConfigureAnims, isNothingConfigurable} from './UI.js';
 import { StartDC360, StartDCHover, StartDOHover, StopDCAnim, StopDOAnim, InitDroneVisualization } from './Animations.js';
+import { StartBladeChange, StopBladeChange } from './BladeChange.js';
 
   
-    //Blades
-    var drone_c_isBlade = 1;
-    var drone_og_isBlade = 1;
-
-       
+    //Blades Change
+    export var drone_c_isBlade = 1;
+    export var drone_og_isBlade = 1;
+    export var enableBlade2IDtimeout = 0;
+    export var disableAnimIDtimeout = 0;
 
    //Animations
-
-    var enableBlade2IDtimeout = 0;
-    var disableAnimIDtimeout = 0;
-
     export var drone_c_isAnimation = 0;
     export var drone_og_isAnimation = 1;
     export var stopDCanimIDtimeout1 = 0;
@@ -287,70 +284,6 @@ document.getElementById("bttn-aspa-2").addEventListener('click', function(){
 });
 
 
-export function DroneCustomWhichBladeIs(){
-    switch (drone_c_isBlade){
-        case 1:
-            SelectButtonOption("bttn-aspa-1","txt-aspa-1");
-            UnselectButtonOption("bttn-aspa-2","txt-aspa-2");
-            document.getElementById("bttn-aspa-1").style.backgroundImage = icon_aspa1_on;
-            document.getElementById("bttn-aspa-2").style.backgroundImage = icon_aspa2_off;
-            DCBlade1();
-            break;
-        case 2:
-            SelectButtonOption("bttn-aspa-2","txt-aspa-2");
-            UnselectButtonOption("bttn-aspa-1","txt-aspa-1");
-            document.getElementById("bttn-aspa-2").style.backgroundImage = icon_aspa2_on;
-            document.getElementById("bttn-aspa-1").style.backgroundImage = icon_aspa1_off;
-            DCBlade2();
-            break;
-    }
-}
-
-export function DroneOgWhichBladeIs(){
-    switch (drone_og_isBlade){
-        case 1:
-            DOBlade1();
-            break;
-        case 2:
-            DOBlade2();
-            break;
-    }
-}
-
-export function StartBladeChange(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : true, no360 : false, noHover : false, noChange : false}});
-
-    //Disable other options9
-    document.getElementById("bttn-aspa-1").style.pointerEvents = "none";
-    document.getElementById("bttn-aspa-2").style.pointerEvents = "none";
-    document.getElementById("bttn-set-blade").style.pointerEvents = "none";
-    document.getElementById("bttn-set-mats").style.pointerEvents = "none";
-    document.getElementById("bttn-set-anim").style.pointerEvents = "none";
-
-    //Disable flow windows
-    document.getElementById("bttn-go-Welcome").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Comparison").style.pointerEvents = "none";
-}
-
-export function StopBladeChange(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : false, noHover : false, noChange : true}});
-
-    //Enable other options
-    document.getElementById("bttn-aspa-1").style.pointerEvents = "auto";
-    document.getElementById("bttn-aspa-2").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-blade").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-mats").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-anim").style.pointerEvents = "auto"; 
-
-    //enable flow windows
-    document.getElementById("bttn-go-Welcome").style.pointerEvents = "auto";
-    document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Comparison").style.pointerEvents = "auto";
-
-    clearTimeout(enableBlade2IDtimeout);
-    clearTimeout(disableAnimIDtimeout);
-}
 
 
 
