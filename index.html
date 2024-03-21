@@ -4,6 +4,10 @@
         <meta  name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style6.css">
     </head>
+
+     <!-- APP ENTRYPOINT -->
+ <script src="main5.js" type="module"></script>
+
 <body>
     <div class="header-container">
         <div>
@@ -19,7 +23,7 @@
             <hr>
         </div>
         <div>
-            <button class="bttn-flow-2" role="button" id="bttn-go-Comparison">COMPARATIVE</button>  
+            <button class="bttn-flow-2" role="button" id="bttn-go-Comparison">COMPARISON</button>  
         </div>
 
     </div>
@@ -41,8 +45,7 @@
                 <button class="txt-name-pfx" role="button" id="txt-name-pfx">BY PREFIXA</button>
             </div>
             <div class="welcome-text">
-                <button class="txt-info-drone" role="button" id="txt-info-drone">Autonomous self-flying taxi drone X7926R brings a business experience, an executive transportation aircraft, allowing to reach important meetings by skipping the expected traffic delays.
-                </button>
+                <button class="txt-info-drone" role="button" id="txt-info-drone">Autonomous self-flying taxi drone X7926R creates unprecedented transportation experiences. An executive transportation aircraft, X7926R saves time and allows passengers to reach their destinations quickly and safely by skipping traffic and avoiding accidents from the air.</button>
             </div>
         </div>
         <div class="start-button" id="start-button">
@@ -56,13 +59,13 @@
             <div class="config-sets">
                 <div class="sets-bttns">
                     <div>
-                        <button class="bttn-set" role="button" id="bttn-set-blade">Rotor blades</button>
+                        <button class="bttn-set" role="button" id="bttn-set-blade">Propellers</button>
                     </div>
                     <div>
-                        <button class="bttn-set" role="button" id="bttn-set-mats">Exterior paint</button>
+                        <button class="bttn-set" role="button" id="bttn-set-mats">Paint</button>
                     </div>
                     <div>
-                        <button class="bttn-set" role="button" id="bttn-set-anim">Action</button>
+                        <button class="bttn-set" role="button" id="bttn-set-anim">Movement</button>
                     </div>
                 </div>
                   <!-- Config Aspa -->
@@ -88,7 +91,7 @@
                     </div>
                     <div class="mat-option">
                         <button class="bttn-mat-option-3" role="button" id="bttn-material-3"></button>
-                        <button class="text-mat-option" role="button" id="txt-material-3">Bussiness Navy</button>
+                        <button class="text-mat-option" role="button" id="txt-material-3">Navy</button>
                     </div>
                     <div class="mat-option">
                         <button class="bttn-mat-option-4" role="button" id="bttn-material-4"></button>
@@ -127,7 +130,7 @@
         <div class="config-set-labels" id="config-set-labels-1">
                 <div>
                     <button class="txt-label-info-title" role="button" id="txt-label-title">Base Configuration</button>    
-                    <button class="txt-label-info" role="button" id="txt-label">The hull of the Drone X7926R is one of the greatest innovations in our times. The combination of kevlar and carbon fiber gives the hull unprecedented resistance and lightness.</button>
+                    <button class="txt-label-info" role="button" id="txt-label">The hull of the drone X7926R is a combination of kevlar and carbon fiber, making it one of the lightest yet most resistant materials of our time. This combination of materials ensures fuel efficiency while securing the safety of the passengers at all times.</button>
                 </div>
         </div>
 
@@ -138,13 +141,13 @@
             <div class="original-info">
                 <button class="txt-original-info-title" role="button" id="txt-info-original">Base Configuration</button>
                 <button class="txt-original-info" role="button" id="txt-info-original-model">Model: X7926R</button>
-                <button class="txt-original-info" role="button" id="txt-info-original-blade">Blades: SK102</button>
+                <button class="txt-original-info" role="button" id="txt-info-original-blade">Propellers: SK102</button>
                 <button class="txt-original-info" role="button" id="txt-info-original-paint">Paint Vermillon</button>
             </div>
             <div class="custom-info">
                 <button class="txt-custom-info-title" role="button" id="txt-info-custom">Your Configuration</button>
                 <button class="txt-custom-info" role="button" id="txt-info-custom-model">Model: X7926R</button>
-                <button class="txt-custom-info" role="button" id="txt-info-custom-blade">Blades: SK102</button>
+                <button class="txt-custom-info" role="button" id="txt-info-custom-blade">Propellers: SK102</button>
                 <button class="txt-custom-info" role="button" id="txt-info-custom-paint">Paint Vermillon</button>
             </div>
             
@@ -162,8 +165,7 @@
     
    
 </body>
- <!-- APP ENTRYPOINT -->
- <script src="main4.js" type="module"></script>
+
 
  <script>
 
@@ -312,7 +314,7 @@
     async function SelectHull(){
         //Show Annotation
         SetVisibilityAnotations("flex");
-        SetTextAnotation('X7926R : HULL', 'The hull of the Drone X7926R is one of the greatest innovations in our times. The combination of kevlar and carbon fiber gives the hull unprecedented resistance and lightness.');
+        SetTextAnotation('X7926R : HULL', 'The hull of the drone X7926R is a combination of kevlar and carbon fiber, making it one of the lightest yet most resistant materials of our time. This combination of materials ensures fuel efficiency while securing the safety of the passengers at all times.');
 
         var temphull = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_body);
         body = temphull[0];
@@ -336,7 +338,7 @@
     async function SelectBlade1(){
         //Show Annotation
         SetVisibilityAnotations("flex");
-        SetTextAnotation('ROTOR BLADES : SK1028', 'The Rotor Blade Model SK1028 offers the Drone faster and more agile mobility thanks to its 7-part blades. In addition, the angles of its design provides a great sporty style honoring its speed improvement.');
+        SetTextAnotation('SK1028 : PROPELLERS', 'The Propeller Model SK1028 offers the drone faster and more agile mobility thanks to its 7-part blades. The angles of the 7-blade design creates a unique athletic style, paying homage to the faster speed of the model.');
     
 
         var tempblade1 = await SDK3DVerse.engineAPI.findEntitiesByEUID(id_blade1);
@@ -360,7 +362,7 @@
     async function SelectBlade2(){
         //Show Annotation
         SetVisibilityAnotations("flex");
-        SetTextAnotation('ROTOR BLADES : SQ302', 'The Rotor Blade Model SQ302 has a lighter design, which gives the drone an elegant mood. Following this line, the 3-part propellers offers noise cancellation that improves the user experience.');
+        SetTextAnotation('SQ302 : PROPELLERS', 'The Propeller Model SQ302 has a light design, giving the drone an elegant look. Additionally the 3-part propellers are silent, improving  passenger comfort and overall user experience.');
 
         
 
