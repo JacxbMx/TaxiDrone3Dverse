@@ -1,37 +1,31 @@
 window.addEventListener("load", initApp);
 
 
-import * as template from './template.js';
+import {id_publicToken, id_sceneUUID} from './template.js';
 
-import { GetCameras, SetCamera, cameraAspa, cameraComparative, cameraConfig, cameraPaint, cameraWelcome } from './Cameras.js';
+import {GetCameras} from './Cameras.js';
 import {GetAllBlades, DOBlade1, DOBlade2, DCBlade1, DCBlade2 } from './Blades.js';
 import {icon_360_off, icon_360_on, icon_aspa1_off, icon_aspa1_on, icon_aspa2_off, icon_aspa2_on, icon_hover_off, icon_hover_on} from './Icons.js';
 import {whitheFont, greenColor, whiteColor, blackColor, blackFont} from './Colors.js';
 import {SetMaterialsReferences, PaintIsVermillon, PaintIsCobalt, PaintIsNavy, PaintIsBlack} from './PaintDrone.js';
 import {GetLightEntities, LightsOff, LightsOn, isLight} from './LightsDrone.js';
 import { SelectButtonOption, UnselectButtonOption } from "./Buttons.js";
+import { IntitUI, ConfigWindow, WelcomeWindow, ComparativeWindow, IsConfigureBlades, IsConfigureMats, IsConfigureAnim, VisibilitySetLights, isConfigureBlades, isConfigureMats,isConfigureAnims, isNothingConfigurable} from './UI.js';
+import { StartDC360, StartDCHover, StartDOHover, StopDCAnim, StopDOAnim, InitDroneVisualization } from './Animations.js';
+import { StartBladeChange, StopBladeChange } from './BladeChange.js';
 
-    //CONDITIONS 
-        //Animations
-        var drone_c_isAnimation = 0;
-        var drone_og_isAnimation = 1;
+  
+    //Blades Change
+    export var drone_c_isBlade = 1;
+    export var drone_og_isBlade = 1;
+    export var enableBlade2IDtimeout = 0;
+    export var disableAnimIDtimeout = 0;
 
-       
-
-        //Blades
-        var drone_c_isBlade = 1;
-        var drone_og_isBlade = 1;
-
-        //button sets
-        var isConfigureBlades = false;
-        var isConfigureMats = false;
-        var isConfigureAnims = false;
-
-    var stopDCanimIDtimeout1 = 0;
-    var stopDCanimIDtimeout2 = 0;
-
-    var enableBlade2IDtimeout = 0;
-    var disableAnimIDtimeout = 0;
+   //Animations
+    export var drone_c_isAnimation = 0;
+    export var drone_og_isAnimation = 1;
+    export var stopDCanimIDtimeout1 = 0;
+    export var stopDCanimIDtimeout2 = 0;
        
     export var rootnode_drone = 0;
 
@@ -60,8 +54,8 @@ import { SelectButtonOption, UnselectButtonOption } from "./Buttons.js";
 async function initApp() {
 
     await SDK3DVerse.joinOrStartSession({
-        userToken: template.id_publicToken,
-        sceneUUID: template.id_sceneUUID,
+        userToken: id_publicToken,
+        sceneUUID: id_sceneUUID,
         canvas: document.getElementById("display-canvas"),
         viewportProperties: {
             defaultControllerType: SDK3DVerse.controller_type.orbit,
@@ -125,15 +119,9 @@ function DefaultConfig(){
     
 }
 
-function IntitUI(){
-    //Set started visualization of UI
-    VisbilityWelcomeWindow("flex");
-    VisibilityConfigurationWindow("none");
-    VisibilityComparisonWindow("none");
-}
 
-//Flow  control of configurator windows
 
+//Header Buttons
 //go to config
 document.getElementById("bttn-go-Config").addEventListener('click', function(){
     ConfigWindow();
@@ -156,109 +144,7 @@ document.getElementById("bttn-go-Comparison").addEventListener('click', function
 });
 
 
-
-
-function WelcomeWindow(){
-    VisbilityWelcomeWindow("flex");
-    VisibilityConfigurationWindow("none");
-    VisibilityComparisonWindow("none");
-    InitDroneVisualization();
-    StopDOAnim();
-    StartDOHover();
-    
-    //camera
-        SetCamera(cameraWelcome);
-
-    //Manage options
-        DroneOgWhichBladeIs();
-
-    //UpdateButtos
-        document.getElementById("bttn-go-Welcome").style.color = greenColor;
-        document.getElementById("bttn-go-Config").style.color = whitheFont;
-        document.getElementById("bttn-go-Comparison").style.color = whitheFont;
-        
-    //Disable flow windows
-        document.getElementById("bttn-go-Welcome").style.pointerEvents = "none";
-        document.getElementById("bttn-go-Config").style.pointerEvents = "auto";
-        document.getElementById("bttn-go-Comparison").style.pointerEvents = "auto";
-
-
-}
-function ConfigWindow(){
-    VisbilityWelcomeWindow("none");
-    VisibilityConfigurationWindow("flex");
-    VisibilityComparisonWindow("none");
-    ConfigDroneVisualization();
-    StopDCAnim();
-    StopDOAnim();
-
-    //camera
-        SetCamera(cameraConfig);
-
-    //Manage configuration set
-        isNothingConfigurable();
-
-    //Manage options
-        DroneCustomWhichBladeIs();
-
-    //UpdateButtos
-        document.getElementById("bttn-go-Welcome").style.color = whitheFont;
-        document.getElementById("bttn-go-Config").style.color = greenColor;
-        document.getElementById("bttn-go-Comparison").style.color = whiteColor;
-
-     //Disable flow windows
-        document.getElementById("bttn-go-Welcome").style.pointerEvents = "auto";
-        document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-        document.getElementById("bttn-go-Comparison").style.pointerEvents = "auto";
-    //Enable lights
-        VisibilitySetLights("inline");
-}
-function ComparativeWindow(){
-    VisbilityWelcomeWindow("none");
-    VisibilityConfigurationWindow("none");
-    VisibilityComparisonWindow("flex");
-    ComparativeDroneVisualization();
-
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : true, noHover : true, noChange : false}});
-    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : true, noHover : true, noChange : false}});
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : true, noChange : false}});
-    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : true, noChange : false}});
-    //camera
-        SetCamera(cameraComparative);
-
-    //Manage options
-        DroneCustomWhichBladeIs();
-        DOBlade1();
-
-    //UpdateButtos
-        document.getElementById("bttn-go-Welcome").style.color = whitheFont;
-        document.getElementById("bttn-go-Config").style.color = whitheFont;
-        document.getElementById("bttn-go-Comparison").style.color = greenColor;
-    //Disable flow windows
-        document.getElementById("bttn-go-Welcome").style.pointerEvents = "auto";
-        document.getElementById("bttn-go-Config").style.pointerEvents = "auto";
-        document.getElementById("bttn-go-Comparison").style.pointerEvents = "none";
-}
-
-//Methods to Manage visbility of UI
-function VisbilityWelcomeWindow(visbility){
-    document.getElementById("welcome-window").style.display = visbility;
-    document.getElementById("start-button").style.display = visbility;
-}
-
-function VisibilityConfigurationWindow(visbility){
-    document.getElementById("config-window").style.display = visbility;
-    document.getElementById("config-set-lights").style.display = visbility;
-    document.getElementById("config-set-labels-1").style.display = "none";
-    
-
-}
-
-function VisibilityComparisonWindow(visbility){
-    document.getElementById("comparative-window").style.display = visbility;
-}
-//END flow control
-
+//Buttons Options Set
 document.getElementById("bttn-set-blade").addEventListener('click', function(){
 
     if(!isConfigureBlades){
@@ -290,126 +176,7 @@ document.getElementById("bttn-set-anim").addEventListener('click', function(){
 });
 
 
-//Methods to manage configuration sets
-function VisibilitySetBlades(visbility){
-    document.getElementById("bttn-aspa-1").style.display = visbility;
-    document.getElementById("bttn-aspa-2").style.display = visbility;
-    document.getElementById("txt-aspa-1").style.display = visbility;
-    document.getElementById("txt-aspa-2").style.display = visbility;
-}
-function VisibilitySetMats(visbility){
-    document.getElementById("bttn-material-1").style.display = visbility;
-    document.getElementById("bttn-material-2").style.display = visbility;
-    document.getElementById("bttn-material-3").style.display = visbility;
-    document.getElementById("bttn-material-4").style.display = visbility;
-    document.getElementById("txt-material-1").style.display = visbility;
-    document.getElementById("txt-material-2").style.display = visbility;
-    document.getElementById("txt-material-3").style.display = visbility;
-    document.getElementById("txt-material-4").style.display = visbility;
-}
-function VisibilitySetAnims(visbility){
-    document.getElementById("bttn-anim-2").style.display = visbility;
-    document.getElementById("bttn-anim-3").style.display = visbility;
-    document.getElementById("txt-anim-2").style.display = visbility;
-    document.getElementById("txt-anim-3").style.display = visbility;
-}
-function VisibilitySetLights(visbility){
-    document.getElementById("bttn-anim-1").style.display = visbility;
-    document.getElementById("txt-anim-1").style.display = visbility;
-}
-
-function IsConfigureBlades(){
-    VisibilitySetBlades("inline");
-    VisibilitySetMats("none");
-    VisibilitySetAnims("none");
-
-    isConfigureBlades = true;
-    isConfigureMats = false;
-    isConfigureAnims = false;
-
-    //Update buttons
-    document.getElementById("bttn-set-blade").style.backgroundColor = greenColor;
-    document.getElementById("bttn-set-blade").style.color = blackFont;
-
-    document.getElementById("bttn-set-mats").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-mats").style.color = whitheFont;
-
-    document.getElementById("bttn-set-anim").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-anim").style.color = whitheFont;
-    
-    //camera
-    SetCamera(cameraAspa);
-
-    
-}
-function IsConfigureMats(){
-    VisibilitySetBlades("none");
-    VisibilitySetMats("inline");
-    VisibilitySetAnims("none");
-
-    isConfigureBlades = false;
-    isConfigureMats = true;
-    isConfigureAnims = false;
-    
-    //Update buttons
-    document.getElementById("bttn-set-blade").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-blade").style.color = whitheFont;
-
-    document.getElementById("bttn-set-mats").style.backgroundColor = greenColor;
-    document.getElementById("bttn-set-mats").style.color = blackFont;
-
-    document.getElementById("bttn-set-anim").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-anim").style.color = whitheFont;
-
-      //camera
-      SetCamera(cameraPaint);
-}
-function IsConfigureAnim(){
-    VisibilitySetBlades("none");
-    VisibilitySetMats("none");
-    VisibilitySetAnims("inline");
-    
-    isConfigureBlades = false;
-    isConfigureMats = false;
-    isConfigureAnims = true;
-
-    //Update buttons
-    document.getElementById("bttn-set-blade").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-blade").style.color = whitheFont;
-
-    document.getElementById("bttn-set-mats").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-mats").style.color = whitheFont;
-
-    document.getElementById("bttn-set-anim").style.backgroundColor = greenColor;
-    document.getElementById("bttn-set-anim").style.color = blackFont;
-
-   //camera
-   SetCamera(cameraConfig); 
-}
-function isNothingConfigurable(){
-    VisibilitySetBlades("none");
-    VisibilitySetMats("none");
-    VisibilitySetAnims("none");
-
-    isConfigureBlades = false;
-    isConfigureMats = false;
-    isConfigureAnims = false;
-
-    //Update buttons
-    document.getElementById("bttn-set-blade").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-blade").style.color = whitheFont;
-
-    document.getElementById("bttn-set-mats").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-mats").style.color = whitheFont;
-
-    document.getElementById("bttn-set-anim").style.backgroundColor = blackColor;
-    document.getElementById("bttn-set-anim").style.color = whitheFont;
-
-    //camera
-    SetCamera(cameraConfig);
-}
-
-//Config Material Paint Drone
+//Buttons Paint Options
 document.getElementById("bttn-material-1").addEventListener('click', function(){
     PaintIsVermillon();
 });
@@ -424,9 +191,7 @@ document.getElementById("bttn-material-4").addEventListener('click', function(){
 });
 
 
-
-
-//Config Lights Drone
+//Button Light Option
 document.getElementById("bttn-anim-1").addEventListener('click', function(){
     if(isLight){
         LightsOff();
@@ -436,44 +201,7 @@ document.getElementById("bttn-anim-1").addEventListener('click', function(){
     }
 });
 
-
-
-
-//Methods to manage drone visualization
-function InitDroneVisualization(){
-    
-    droneOriginal.setGlobalTransform({position : [0,0,0]});
-    droneConfigurable.setGlobalTransform({position : [0,0,0]});
-
-
-    droneOriginal.setVisibility(true);
-    droneConfigurable.setVisibility(false);
-}
-
-function ConfigDroneVisualization(){
-
-    droneOriginal.setGlobalTransform({position : [0,0,0]});
-    droneConfigurable.setGlobalTransform({position : [0,0,0]});
-
-    droneOriginal.setVisibility(false);
-    droneConfigurable.setVisibility(true);
-}
-
-function ComparativeDroneVisualization(){
-
-    droneOriginal.setGlobalTransform({position : [-2.5,0,0]});
-    droneConfigurable.setGlobalTransform({position : [2.5,0,0]});
-
-
-    droneOriginal.setVisibility(true);
-    droneConfigurable.setVisibility(true);
-
-}
-
-
-
-
-//Config anim
+//Buttons Movement options
 document.getElementById("bttn-anim-2").addEventListener('click', function(){
     if(drone_c_isAnimation != 1){
         SelectButtonOption("bttn-anim-2","txt-anim-2");
@@ -482,9 +210,10 @@ document.getElementById("bttn-anim-2").addEventListener('click', function(){
         document.getElementById("bttn-anim-3").style.backgroundImage = icon_360_off;
 
         StartDCHover();
+    
 
         stopDCanimIDtimeout1 = setTimeout(StopDCAnim, 16000);
-        
+
         drone_c_isAnimation = 1;
     }else if (drone_c_isAnimation == 1){
         
@@ -503,7 +232,6 @@ document.getElementById("bttn-anim-3").addEventListener('click', function(){
         document.getElementById("bttn-anim-2").style.backgroundImage = icon_hover_off;
 
         StartDC360();
-       
         stopDCanimIDtimeout2 = setTimeout(StopDCAnim, 16000);
 
         drone_c_isAnimation = 2;
@@ -514,78 +242,10 @@ document.getElementById("bttn-anim-3").addEventListener('click', function(){
     }
     
 });
-//Methods to anim
-function StartDOHover(){
-    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : true, isChange : false, no360 : true, noHover : false, noChange : false}});
-
-}
-function StopDOAnim(){
-    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : true, noHover : true, noChange : true}});
-}
-function StartDO360(){
-    rootnode_drone[1].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : false, noChange : false}});
-}
-
-function StopDCAnim(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : true, noHover : true, noChange : false}});
-
-    //Enable other options
-    document.getElementById("bttn-anim-2").style.pointerEvents = "auto";
-    document.getElementById("bttn-anim-3").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-blade").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-mats").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-anim").style.pointerEvents = "auto"; 
-
-    //enable flow windows
-    document.getElementById("bttn-go-Welcome").style.pointerEvents = "auto";
-    document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Comparison").style.pointerEvents = "auto";
-
-    //Update buttons
-    UnselectButtonOption("bttn-anim-2","txt-anim-2");
-    UnselectButtonOption("bttn-anim-3","txt-anim-3");
-    document.getElementById("bttn-anim-2").style.backgroundImage = icon_hover_off;
-    document.getElementById("bttn-anim-3").style.backgroundImage = icon_360_off;
-
-    clearTimeout(stopDCanimIDtimeout1);
-    clearTimeout(stopDCanimIDtimeout2);
-    
-}
-
-function StartDCHover(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : true, isChange : false, no360 : true, noHover : false, noChange : false}});
-
-    //Disable other options
-    document.getElementById("bttn-anim-2").style.pointerEvents = "auto";
-    document.getElementById("bttn-anim-3").style.pointerEvents = "none";
-    document.getElementById("bttn-set-blade").style.pointerEvents = "none";
-    document.getElementById("bttn-set-mats").style.pointerEvents = "none";
-    document.getElementById("bttn-set-anim").style.pointerEvents = "none";
-
-    //Disable flow windows
-    document.getElementById("bttn-go-Welcome").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Comparison").style.pointerEvents = "none";
-
-}
-
-function StartDC360(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : true, isHover : false, isChange : false, no360 : false, noHover : false, noChange : false}});
-    //Disable other options
-    document.getElementById("bttn-anim-2").style.pointerEvents = "none";
-    document.getElementById("bttn-anim-3").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-blade").style.pointerEvents = "none";
-    document.getElementById("bttn-set-mats").style.pointerEvents = "none";
-    document.getElementById("bttn-set-anim").style.pointerEvents = "none";
-    //Disable flow windows
-    document.getElementById("bttn-go-Welcome").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Comparison").style.pointerEvents = "none";
-}
 
 
 
-////// BLADES CONFIGURATION /////
+//Buttons Propelers Options
 document.getElementById("bttn-aspa-1").addEventListener('click', function(){
     if(drone_c_isBlade != 1){
         SelectButtonOption("bttn-aspa-1","txt-aspa-1");
@@ -624,70 +284,6 @@ document.getElementById("bttn-aspa-2").addEventListener('click', function(){
 });
 
 
-async function DroneCustomWhichBladeIs(){
-    switch (drone_c_isBlade){
-        case 1:
-            SelectButtonOption("bttn-aspa-1","txt-aspa-1");
-            UnselectButtonOption("bttn-aspa-2","txt-aspa-2");
-            document.getElementById("bttn-aspa-1").style.backgroundImage = icon_aspa1_on;
-            document.getElementById("bttn-aspa-2").style.backgroundImage = icon_aspa2_off;
-            DCBlade1();
-            break;
-        case 2:
-            SelectButtonOption("bttn-aspa-2","txt-aspa-2");
-            UnselectButtonOption("bttn-aspa-1","txt-aspa-1");
-            document.getElementById("bttn-aspa-2").style.backgroundImage = icon_aspa2_on;
-            document.getElementById("bttn-aspa-1").style.backgroundImage = icon_aspa1_off;
-            DCBlade2();
-            break;
-    }
-}
-
-async function DroneOgWhichBladeIs(){
-    switch (drone_og_isBlade){
-        case 1:
-            DOBlade1();
-            break;
-        case 2:
-            DOBlade2();
-            break;
-    }
-}
-
-function StartBladeChange(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : true, no360 : false, noHover : false, noChange : false}});
-
-    //Disable other options9
-    document.getElementById("bttn-aspa-1").style.pointerEvents = "none";
-    document.getElementById("bttn-aspa-2").style.pointerEvents = "none";
-    document.getElementById("bttn-set-blade").style.pointerEvents = "none";
-    document.getElementById("bttn-set-mats").style.pointerEvents = "none";
-    document.getElementById("bttn-set-anim").style.pointerEvents = "none";
-
-    //Disable flow windows
-    document.getElementById("bttn-go-Welcome").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Comparison").style.pointerEvents = "none";
-}
-
-function StopBladeChange(){
-    rootnode_drone[0].setComponent('animation_controller',{ dataJSON: {  is360 : false, isHover : false, isChange : false, no360 : false, noHover : false, noChange : true}});
-
-    //Enable other options
-    document.getElementById("bttn-aspa-1").style.pointerEvents = "auto";
-    document.getElementById("bttn-aspa-2").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-blade").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-mats").style.pointerEvents = "auto";
-    document.getElementById("bttn-set-anim").style.pointerEvents = "auto"; 
-
-    //enable flow windows
-    document.getElementById("bttn-go-Welcome").style.pointerEvents = "auto";
-    document.getElementById("bttn-go-Config").style.pointerEvents = "none";
-    document.getElementById("bttn-go-Comparison").style.pointerEvents = "auto";
-
-    clearTimeout(enableBlade2IDtimeout);
-    clearTimeout(disableAnimIDtimeout);
-}
 
 
 
