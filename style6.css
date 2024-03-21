@@ -1070,18 +1070,18 @@ margin-right: 16px;
     height: 40px;
     font-size: 18;
     margin-top: 16px;
-    margin-left: 10px;
+    margin-left: 0px;
     color: rgb(255, 255, 255);
-    border: solid #0669da 1px;
-    text-align: start;
-    width: 120px;
+    border: solid #0669da 0px;
+    text-align: end;
+    width: 114px;
   
   }
   .txt-name-pfx{
     height: 10px;
     font-size: 8;
     margin-top: 0px;
-    margin-left: 10px;
+    margin-left: 12px;
   }
   .txt-info-drone{
     height: 104px;
