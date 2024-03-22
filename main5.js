@@ -60,8 +60,9 @@ async function initApp() {
             defaultControllerType: SDK3DVerse.controller_type.none,
         },
     });
-
-    //setupCameraController(document.getElementById("display-canvas"));
+    //const canvas = document.getElementById("display-canvas");
+   // setupCameraController(canvas);
+    //console.log("Three js camera set");
 
     GetAllBlades();
       

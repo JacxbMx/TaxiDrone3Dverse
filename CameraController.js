@@ -47,5 +47,7 @@ export async function setupCameraController(canvas) {
         cameraControls.update(delta);
         requestAnimationFrame(anim);
     })();
+
+    console.log("Three js camera set");
 };
 */
