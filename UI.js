@@ -3,7 +3,7 @@ import { DroneCustomWhichBladeIs, DroneOgWhichBladeIs} from "./BladeChange.js";
 import { DOBlade1 } from "./Blades.js";
 import { SetCamera, cameraAspa, cameraComparative, cameraConfig, cameraPaint, cameraWelcome } from "./Cameras.js";
 import { blackColor, blackFont, greenColor, whitheFont, whiteColor } from "./Colors.js";
-import { rootnode_drone } from "./main5.js";
+import { rootnode_drone } from "./main.js";
 
  //button sets
 export var isConfigureBlades = false;
