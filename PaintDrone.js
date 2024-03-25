@@ -1,5 +1,5 @@
 import { SelectButtonOption, UnselectButtonOption } from "./Buttons.js";
-import { hull_ref, l_door_paint_ref, r_door_paint_ref } from "./main5.js";
+import { hull_ref, l_door_paint_ref, r_door_paint_ref } from "./main.js";
 
 export var paint_vermillon = 0;
 export var paint_cobalt = 0;

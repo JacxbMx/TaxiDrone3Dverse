@@ -1,7 +1,7 @@
 import { DCBlade1, DCBlade2, DOBlade1, DOBlade2 } from "./Blades.js";
 import { SelectButtonOption, UnselectButtonOption } from "./Buttons.js";
 import { icon_aspa1_off, icon_aspa1_on, icon_aspa2_off, icon_aspa2_on } from "./Icons.js";
-import { disableAnimIDtimeout, drone_c_isBlade, drone_og_isBlade, enableBlade2IDtimeout, rootnode_drone } from "./main5.js";
+import { disableAnimIDtimeout, drone_c_isBlade, drone_og_isBlade, enableBlade2IDtimeout, rootnode_drone } from "./main.js";
 
 export function DroneCustomWhichBladeIs(){
     switch (drone_c_isBlade){

@@ -1,6 +1,6 @@
 import { UnselectButtonOption } from "./Buttons.js";
 import { icon_360_off, icon_hover_off } from "./Icons.js";
-import { droneConfigurable, droneOriginal, rootnode_drone, stopDCanimIDtimeout1, stopDCanimIDtimeout2} from "./main5.js";
+import { droneConfigurable, droneOriginal, rootnode_drone, stopDCanimIDtimeout1, stopDCanimIDtimeout2} from "./main.js";
 
 //CONDITIONS 
 
