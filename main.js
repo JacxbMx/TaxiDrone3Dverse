@@ -57,7 +57,7 @@ async function initApp() {
         sceneUUID: id_sceneUUID,
         canvas: document.getElementById("display-canvas"),
         viewportProperties: {
-            defaultControllerType: SDK3DVerse.controller_type.none,
+            defaultControllerType: SDK3DVerse.controller_type.editor,
         },
     });
     //const canvas = document.getElementById("display-canvas");
