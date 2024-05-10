@@ -60,6 +60,7 @@ async function initApp() {
             defaultControllerType: SDK3DVerse.controller_type.editor,
         },
     });
+
     //const canvas = document.getElementById("display-canvas");
    // setupCameraController(canvas);
     //console.log("Three js camera set");
@@ -73,7 +74,7 @@ async function initApp() {
     IntitUI();
 
     SDK3DVerse.updateControllerSetting({
-        speed: 0.05,
+        speed: 1.5,
         sensivity: 0.05,
         damping: 0.65,
         angularDamping: 0.65,
